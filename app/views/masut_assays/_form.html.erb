@@ -1,0 +1,49 @@
+<%= form_for(@masut_assay) do |f| %>
+  <% if @masut_assay.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@masut_assay.errors.count, "error") %> prohibited this masut_assay from being saved:</h2>
+
+      <ul>
+      <% @masut_assay.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label 'Структурное подразделение:' %><br />
+    <%= f.select :subdivision, ['ТЭЦ-2','ТЭЦ-3','ТЭЦ-4','ТЭЦ-5','КРК'], include_blank: :true %>
+  </div>
+  <div class="field">
+    <%= f.label 'Дата время:' %><br />
+    <%= f.datetime_select :dttm,  use_month_numbers: true, order: [:day, :month, :year], include_seconds: false, default: start_of_hour %>
+  </div>
+  <div class="field">
+    <%= f.label 'Плотность (кг/м3):' %><br />
+    <%= f.text_field :density %>
+  </div>
+  <div class="field">
+    <%= f.label 'Влажность (%):' %><br />
+    <%= f.text_field :moisture %>
+  </div>
+  <div class="field">
+    <%= f.label 'Сера (%):' %><br />
+    <%= f.text_field :sera %>
+  </div>
+  <div class="field">
+    <%= f.label 'Температура вспышки:' %><br />
+    <%= f.text_field :flash_point %>
+  </div>
+  <div class="field">
+    <%= f.label 'Зола (%):' %><br />
+    <%= f.text_field :ash %>
+  </div>
+  <div class="field">
+    <%= f.label 'Низшая рабочая теплота сгорания (ккал/кг):' %><br />
+    <%= f.text_field :ncv %>
+  </div>
+  <div class="actions">
+    <%= f.submit 'Принять' %>
+  </div>
+<% end %>

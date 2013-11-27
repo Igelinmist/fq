@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Качество топлива</title>
+  <%= stylesheet_link_tag "application" %>
+  <%= javascript_include_tag "application" %>
+
+  <%= csrf_meta_tag %>
+</head>
+<body class="<%= controller.controller_name %>">
+<div id="banner">
+  <%= image_tag("logo.png") %>
+
+  <%= @page_title || "Химический анализ топлива" %>
+</div>
+<div id="columns">
+  <div id="side">
+    <ul>
+      <li><%= link_to 'Пробы угля', coil_assays_path %></li>
+      <li><%= link_to 'Пробы газа', gaz_assays_path %></li>
+      <li><%= link_to 'Пробы мазута', masut_assays_path %></li>
+      <li><%= link_to 'Пользователи', users_path %></li>
+
+      <li><%#= link_to 'Журнал событий', events_path%></li>
+    </ul>
+  </div>
+  <div id="main">
+    <%= yield %>
+  </div>
+</div>
+</body>
+</html>

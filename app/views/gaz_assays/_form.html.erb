@@ -1,0 +1,29 @@
+<%= form_for(@gaz_assay) do |f| %>
+  <% if @gaz_assay.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@gaz_assay.errors.count, "error") %> prohibited this gaz_assay from being saved:</h2>
+
+      <ul>
+      <% @gaz_assay.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label 'Структурное подразделение:' %><br />
+    <%= f.select :subdivision, ['ТЭЦ-2','ТЭЦ-3','ТЭЦ-4','КРК'], include_blank: :true%>
+  </div>
+  <div class="field">
+    <%= f.label 'Дата время:' %><br />
+    <%= f.datetime_select :dttm, use_month_numbers: true, order: [:day, :month, :year], include_seconds: false, default: start_of_hour %>
+  </div>
+  <div class="field">
+    <%= f.label 'Низшая теплота сгорания (ккал/кг):' %><br />
+    <%= f.text_field :ncv %>
+  </div>
+  <div class="actions">
+    <%= f.submit 'Принять' %>
+  </div>
+<% end %>

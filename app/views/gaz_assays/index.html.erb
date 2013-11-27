@@ -1,0 +1,24 @@
+<table>
+  <tr>
+    <th>Структурное<br/>подразделение</th>
+    <th>Дата время</th>
+    <th>Низшая теплота<br/>сгорания (ккал/кг)</th>
+    <th></th>
+  </tr>
+
+<% @gaz_assays.each do |gaz_assay| %>
+  <tr>
+    <td><%= gaz_assay.subdivision %></td>
+    <td><%= gaz_assay.dttm.strftime("%d.%m.%Y %H:%M") %></td>
+    <td><%= gaz_assay.ncv %></td>
+    <td>
+      <%= link_to image_tag("edit_wb.png",:size => "16x16", :alt => "Править", :title => "Править"), edit_gaz_assay_path(gaz_assay) %>
+      <%= link_to image_tag("delete_wb.png",:size => "16x16", :alt => "Удалить", :title =>"Удалить"), gaz_assay, method: :delete, data: { confirm: 'Вы уверены?' } %>
+    </td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Ввести данные новой пробы', new_gaz_assay_path %>

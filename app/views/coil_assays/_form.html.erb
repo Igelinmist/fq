@@ -1,0 +1,53 @@
+<%= form_for(@coil_assay) do |f| %>
+  <% if @coil_assay.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@coil_assay.errors.count, "error") %> prohibited this coil_assay from being saved:</h2>
+
+      <ul>
+      <% @coil_assay.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label 'Структурное подразделение:' %><br />
+    <%= f.select :subdivision, ['ТЭЦ-2','ТЭЦ-4','ТЭЦ-5'], include_blank: :true %>
+  </div>
+  <div class="field">
+    <%= f.label 'Дата время:' %><br />
+    <%= f.datetime_select :dttm, use_month_numbers: true, order: [:day, :month, :year], include_seconds: false, default: start_of_hour %>
+  </div>
+  <div class="field">
+    <%= f.label 'Номер маршрута:' %><br />
+    <%= f.text_field :route %>
+  </div>
+  <div class="field">
+    <%= f.label 'Влага рабочая (%):' %><br />
+    <%= f.text_field :moisture %>
+  </div>
+  <div class="field">
+    <%= f.label 'Зольность рабочего топлива (%):' %><br />
+    <%= f.text_field :wf_ash %>
+  </div>
+  <div class="field">
+    <%= f.label 'Зольность сухого топлива (%):' %><br />
+    <%= f.text_field :df_ash %>
+  </div>
+  <div class="field">
+    <%= f.label 'Выход летучих веществ (%):' %><br />
+    <%= f.text_field :letuch %>
+  </div>
+  <div class="field">
+    <%= f.label 'Выход серы (%):' %><br />
+    <%= f.text_field :sera %>
+  </div>
+  <div class="field">
+    <%= f.label 'Низшая теплота сгорания (ккал/кг):' %><br />
+    <%= f.text_field :ncv %>
+  </div>
+  <div class="actions">
+    <%= f.submit 'Принять' %>
+  </div>
+<% end %>

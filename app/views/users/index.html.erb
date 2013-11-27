@@ -1,0 +1,34 @@
+<h1>Перечень пользователей</h1>
+
+<table>
+  <tr>
+    <th>Login</th>
+    <th>Фамилия</th>
+    <th>Имя (Отчество)</th>
+    <th>Структурное подразделение</th>
+    <th>Роль</th>
+    <th>Входов</th>
+    <th>Последний вход</th>
+    <th></th>
+  </tr>
+
+<% @users.each do |user| %>
+  <tr>
+    <td><%= user.login %></td>
+    <td><%= user.surname %></td>
+    <td><%= user.name %></td>
+    <td><%= user.subdivision %></td>
+    <td><%= user.role %></td>
+    <td><%= user.login_count %></td>
+    <td><%= user.last_login %></td>
+    <td>
+      <%= link_to image_tag("edit_wb.png",:size => "16x16", :alt => "Править", :title => "Править"), edit_user_path(user) %>
+      <%= link_to image_tag("delete_wb.png",:size => "16x16", :alt => "Удалить", :title =>"Удалить"), user, method: :delete, data: { confirm: 'Are you sure?' } %>
+    </td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Добавить пользователя', new_user_path %>
