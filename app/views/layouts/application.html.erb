@@ -9,22 +9,35 @@
 </head>
 <body class="<%= controller.controller_name %>">
 <div id="banner">
-  <%= image_tag("logo.png") %>
-
+  <div id="logo_image">
+    <%= link_to image_tag("logo.png"),{controller: 'home', action: 'index'} %>
+  </div>
   <%= @page_title || "Химический анализ топлива" %>
 </div>
 <div id="columns">
   <div id="side">
-    <ul>
-      <li><%= link_to 'Пробы угля', coil_assays_path %></li>
-      <li><%= link_to 'Пробы газа', gaz_assays_path %></li>
-      <li><%= link_to 'Пробы мазута', masut_assays_path %></li>
-      <li><%= link_to 'Пользователи', users_path %></li>
+    <% if @user.present?  %>
+        Ввод результатов качественного анализа:
+        <ul>
+          <li><%= link_to 'Уголь', coil_assays_path %></li>
+          <li><%= link_to 'Газ', gaz_assays_path %></li>
+          <li><%= link_to 'Мазут', masut_assays_path %></li>
+        </ul>
+        Администрирование
+        <%= link_to('Пользователи', users_path) if (@user.grants & 256) > 0%>
 
-      <li><%#= link_to 'Журнал событий', events_path%></li>
-    </ul>
+    <% end %>
+    <div style="clear:both;">&nbsp;</div>
   </div>
+
+
   <div id="main">
+    <% if flash[:notice] -%>
+        <div id="notice"><%= flash[:notice] %></div>
+    <% end -%>
+    <% if flash[:error] -%>
+        <div id="error"><%= flash[:error] %></div>
+    <% end -%>
     <%= yield %>
   </div>
 </div>

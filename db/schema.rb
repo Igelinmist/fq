@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131124032443) do
+ActiveRecord::Schema.define(:version => 20131129064846) do
 
   create_table "coil_assays", :force => true do |t|
     t.string   "subdivision"
@@ -23,16 +23,20 @@ ActiveRecord::Schema.define(:version => 20131124032443) do
     t.float    "letuch"
     t.float    "sera"
     t.float    "ncv"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
+    t.boolean  "is_suplier_assay", :default => false
+    t.boolean  "is_public_info",   :default => false
   end
 
   create_table "gaz_assays", :force => true do |t|
     t.string   "subdivision"
     t.datetime "dttm"
     t.float    "ncv"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
+    t.boolean  "is_suplier_assay", :default => false
+    t.boolean  "is_public_info",   :default => false
   end
 
   create_table "masut_assays", :force => true do |t|
@@ -44,8 +48,10 @@ ActiveRecord::Schema.define(:version => 20131124032443) do
     t.float    "flash_point"
     t.float    "ash"
     t.float    "ncv"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
+    t.boolean  "is_suplier_assay", :default => false
+    t.boolean  "is_public_info",   :default => false
   end
 
   create_table "users", :force => true do |t|
@@ -54,11 +60,11 @@ ActiveRecord::Schema.define(:version => 20131124032443) do
     t.string   "surname"
     t.string   "name"
     t.string   "subdivision"
-    t.string   "role"
     t.integer  "login_count"
-    t.string   "last_login"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
+    t.datetime "last_login"
+    t.integer  "grants",          :default => 0
   end
 
 end

@@ -1,3 +1,4 @@
+#encoding: utf-8
 class UsersController < ApplicationController
   # GET /users
   # GET /users.json
@@ -25,7 +26,7 @@ class UsersController < ApplicationController
   # GET /users/new.json
   def new
     @user = User.new
-
+    @page_title = 'Регистрация нового пользователя'
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @user }

@@ -1,47 +1,81 @@
 <%= form_for(@user) do |f| %>
-  <% if @user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+      <% if @user.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
 
-      <ul>
-      <% @user.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
+          <ul>
+          <% @user.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+          </ul>
+        </div>
       <% end %>
-      </ul>
+
+    <fieldset class="user_about">
+      <legend>Данные пользователя</legend>
+      <div class="field">
+        <%= f.label :login %>
+        <%= f.text_field :login %>
+      </div>
+
+      <div class="field">
+        <%= f.label 'Пароль' %>
+        <%= f.password_field :password %>
+      </div>
+
+      <div class="field">
+        <%= f.label 'Подтверждение пароля' %>
+        <%= f.password_field :password_confirmation %>
+      </div>
+      <div class="field">
+        <%= f.label 'Фамилия' %>
+        <%= f.text_field :surname %>
+      </div>
+      <div class="field">
+        <%= f.label 'Имя (Отчество)' %>
+        <%= f.text_field :name %>
+      </div>
+      <div class="field">
+        <%= f.label 'Структурное подразделение' %>
+        <%= f.select :subdivision,['ТЭЦ-2', 'ТЭЦ-3', 'ТЭЦ-4', 'ТЭЦ-5', 'КРК', 'УТИТ', 'УПЭК', 'УИТ'], include_blank: :true %>
+      </div>
+      <%= f.hidden_field :grants %>
+    </fieldset>
+    <fieldset class="user_grants">
+      <legend>Права на данные СП</legend>
+      <%= check_box_tag :can_read_subdivision_data, 1 %>
+      <%= label_tag(:can_read_subdivision_data, "Чтение") %><br />
+      <%= check_box_tag :can_edit_subdivision_data, 2 %>
+      <%= label_tag(:can_edit_subdivision_data, "Редактирование") %><br />
+      <%= check_box_tag :can_correct_subdivision_data, 4 %>
+      <%= label_tag(:can_correct_subdivision_data, "Корректировка") %><br />
+      <%= check_box_tag :can_view_subdivision_report, 8 %>
+      <%= label_tag(:can_view_subdivision_report, "Отчеты") %>
+    </fieldset>
+    <fieldset class="user_grants">
+      <legend>Права на данные Филиала</legend>
+      <%= check_box_tag :can_read_filial_data, 16 %>
+      <%= label_tag(:can_read_filial_data, "Чтение") %><br />
+      <%= check_box_tag :can_edit_filial_data, 32 %>
+      <%= label_tag(:can_edit_filial_data, "Редактирование") %><br />
+      <%= check_box_tag :can_correct_filial_data, 64 %>
+      <%= label_tag(:can_correct_filial_data, "Корректировка") %><br />
+      <%= check_box_tag :can_view_filial_report, 128 %>
+      <%= label_tag(:can_view_filial_report, "Отчеты") %>
+    </fieldset>
+    <fieldset class="user_grants">
+      <legend>Права на администрирование</legend>
+      <%= check_box_tag :can_administrate_users, 256 %>
+      <%= label_tag(:can_administrate_users, "Управление пользователями") %>
+
+    </fieldset>
+    <br />
+    <div class="actions">
+      <%= f.submit 'Принять' %>
     </div>
-  <% end %>
 
-  <div class="field">
-    <%= f.label :login %><br />
-    <%= f.text_field :login %>
-  </div>
 
-  <div class="field">
-    <%= f.label 'Пароль' %><br />
-    <%= f.password_field :password %>
-  </div>
 
-  <div class="field">
-    <%= f.label 'Подтверждение пароля' %><br />
-    <%= f.password_field :password_confirmation %>
-  </div>
-  <div class="field">
-    <%= f.label 'Фамилия' %><br />
-    <%= f.text_field :surname %>
-  </div>
-  <div class="field">
-    <%= f.label 'Имя (Отчество)' %><br />
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label 'Структурное подразделение' %><br />
-    <%= f.select :subdivision,['ТЭЦ-2', 'ТЭЦ-3', 'ТЭЦ-4', 'ТЭЦ-5', 'КРК', 'УТИТ', 'УПЭК', 'УИТ'], include_blank: :true %>
-  </div>
-  <div class="field">
-    <%= f.label 'Роль' %><br />
-    <%= f.select :role,['admin','edit','view'] %>
-  </div>
-  <div class="actions">
-    <%= f.submit 'Принять' %>
-  </div>
+
+
 <% end %>
