@@ -5,9 +5,7 @@ class ApplicationController < ActionController::Base
 
   protected
   def authorize
-    unless User.find_by_id(session[:user_id])
-      redirect_to login_url, notice: 'Пожалуйста, пройдите авторизацию'
-    else
+    if User.find_by_id(session[:user_id])
       @user = User.find(session[:user_id])
     end
   end

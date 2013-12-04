@@ -81,4 +81,25 @@ class UsersController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def home
+    @page_title = 'Управление топлива и транспорта'
+  end
+
+  def login
+    user = User.find_by_login(params[:login])
+    if user and user.authenticate(params[:password])
+      session[:user_id] = user.id
+      redirect_to controller: 'users', action: 'home'
+    else
+      redirect_to controller: 'home', action: 'index'
+      flash[:error] = 'Неверная комбинация имени и пароля'
+    end
+  end
+
+  def logout
+    session[:user_id] = nil
+    flash[:notice] = 'Сеанс работы завершен'
+    redirect_to controller: 'home', action: 'index'
+  end
 end

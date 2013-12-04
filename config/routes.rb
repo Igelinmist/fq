@@ -1,14 +1,12 @@
 Fq::Application.routes.draw do
 
-  get 'home' => 'home#index'
+  match 'home' => 'home#index'
 
-  get 'admin' => 'admin#index'
-
-  controller :sessions do
-    get 'login' => :new
-    post 'login' => :create
-    delete 'logout' => :destroy
-  end
+  #controller :sessions do
+  #  get 'login' => :new
+  #  post 'login' => :create
+  #  delete 'logout' => :destroy
+  #end
 
   resources :masut_assays
 
@@ -19,8 +17,15 @@ Fq::Application.routes.draw do
   resources :gaz_assays
 
 
-  resources :users
 
+
+  controller :users do
+    match 'users/home' => 'users#home'
+    post 'login' => :login
+    delete 'logout' => :logout
+  end
+
+  resources :users
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
