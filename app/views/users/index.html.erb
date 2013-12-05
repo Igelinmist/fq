@@ -18,7 +18,7 @@
     <td><%= user.name %></td>
     <td><%= user.subdivision %></td>
     <td><%= user.login_count %></td>
-    <td><%= user.last_login %></td>
+    <td><%= user.last_login.strftime("%d.%m.%Y %H:%M") unless user.last_login.blank?  %></td>
     <td>
       <%= link_to image_tag("edit_wb.png",:size => "16x16", :alt => "Править", :title => "Править"), edit_user_path(user) %>
       <%= link_to image_tag("delete_wb.png",:size => "16x16", :alt => "Удалить", :title =>"Удалить"), user, method: :delete, data: { confirm: 'Are you sure?' } %>

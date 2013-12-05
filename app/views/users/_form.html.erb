@@ -44,13 +44,19 @@
     <fieldset class="user_grants">
       <legend>Права на данные СП</legend>
       <%= check_box_tag :can_read_subdivision_data, 1 %>
-      <%= label_tag(:can_read_subdivision_data, "Чтение") %><br />
+      <%= label_tag(:can_read_subdivision_data, "чтение") %><br />
       <%= check_box_tag :can_edit_subdivision_data, 2 %>
-      <%= label_tag(:can_edit_subdivision_data, "Редактирование") %><br />
+      <%= label_tag(:can_edit_subdivision_data, "редактирование") %><br />
       <%= check_box_tag :can_correct_subdivision_data, 4 %>
-      <%= label_tag(:can_correct_subdivision_data, "Корректировка") %><br />
+      <%= label_tag(:can_correct_subdivision_data, "корректировка") %><br />
       <%= check_box_tag :can_view_subdivision_report, 8 %>
-      <%= label_tag(:can_view_subdivision_report, "Отчеты") %>
+      <%= label_tag(:can_view_subdivision_report, "отчеты") %><br />
+      <%= check_box_tag :can_use_coil, 512 %>
+      <%= label_tag(:can_use_coil, "данные по углю") %><br />
+      <%= check_box_tag :can_use_gaz, 1024 %>
+      <%= label_tag(:can_use_gaz, "данные по газу") %><br />
+      <%= check_box_tag :can_use_masut, 2048 %>
+      <%= label_tag(:can_use_masut, "данные по мазуту") %>
     </fieldset>
     <fieldset class="user_grants">
       <legend>Права на данные Филиала</legend>

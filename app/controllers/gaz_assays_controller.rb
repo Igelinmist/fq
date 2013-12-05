@@ -3,8 +3,11 @@ class GazAssaysController < ApplicationController
   # GET /gaz_assays
   # GET /gaz_assays.json
   def index
-    @gaz_assays = GazAssay.all
-    @page_title = 'Перечень проб газа'
+    @user = User.find(session[:user_id])
+    #TODO Добавить возможность пользователям управления смотреть анализы химиков по газу
+    @gaz_assays = GazAssay.order(:dttm).find_all_by_subdivision(@user.subdivision)
+
+    @page_title = 'Перечень анализов качества газа'
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @gaz_assays }
@@ -26,7 +29,8 @@ class GazAssaysController < ApplicationController
   # GET /gaz_assays/new.json
   def new
     @gaz_assay = GazAssay.new
-
+    @user = User.find(session[:user_id])
+    @gaz_assay.subdivision = @user.subdivision
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @gaz_assay }
@@ -45,7 +49,7 @@ class GazAssaysController < ApplicationController
 
     respond_to do |format|
       if @gaz_assay.save
-        format.html { redirect_to gaz_assays_url, notice: 'Gaz assay was successfully created.' }
+        format.html { redirect_to gaz_assays_url, notice: 'Данные качественного анализа газа успешно внесены.' }
         format.json { render json: @gaz_assay, status: :created, location: @gaz_assay }
       else
         format.html { render action: "new" }
@@ -61,7 +65,7 @@ class GazAssaysController < ApplicationController
 
     respond_to do |format|
       if @gaz_assay.update_attributes(params[:gaz_assay])
-        format.html { redirect_to gaz_assays_url, notice: 'Gaz assay was successfully updated.' }
+        format.html { redirect_to gaz_assays_url, notice: 'Данные качественного анализа газа успешно обновлены.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

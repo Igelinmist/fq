@@ -7,7 +7,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :name
       t.string :subdivision
       t.string :role
-      t.integer :login_count
+      t.integer :login_count, default: 0
       t.string :last_login
 
       t.timestamps

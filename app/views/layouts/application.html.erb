@@ -8,52 +8,32 @@
   <%= csrf_meta_tag %>
 </head>
 <body class="<%= controller.controller_name %>">
-<div id="banner">
-  <table>
-    <tr>
-      <td>
+    <%= render 'home/header' %>
+    <div id="columns">
+      <div id="menu">
+        <% if session[:user_id]  -%>
+            <%= 'Результаты качественного анализа:' if (has_grant?(:index) || has_grant?(:edit) || has_grant?(:correct))%>
+            <ul>
+              <li><%= link_to 'Уголь', coil_assays_path if has_fuel?(:coil) %></li>
+              <li><%= link_to 'Газ', gaz_assays_path if has_fuel?(:gaz) %></li>
+              <li><%= link_to 'Мазут', masut_assays_path if has_fuel?(:masut) %></li>
+            </ul>
+            <% if (@user.grants & 256) > 0 -%>
+            Администрирование
+            <%= link_to('Пользователи', users_path) %>
+            <% end -%>
+        <% end -%>
+      </div>
 
-      </td>
-      <td>
-
-      </td>
-    </tr>
-  </table>
-  <div id="logo_image">
-    <%= link_to image_tag("logo.png"),{controller: 'home', action: 'index'} %>
-  </div>
-  <%= @page_title || "Химический анализ топлива" %>
-</div>
-<div id="columns">
-  <div id="side">
-    <% if session[:user_id]  %>
-        <%= button_to "Выход #{@user.login}",logout_path, method: :delete %><br />
-        Ввод результатов качественного анализа:
-        <ul>
-          <li><%= link_to 'Уголь', coil_assays_path %></li>
-          <li><%= link_to 'Газ', gaz_assays_path %></li>
-          <li><%= link_to 'Мазут', masut_assays_path %></li>
-        </ul>
-        Администрирование
-        <%= link_to('Пользователи', users_path) if (@user.grants & 256) > 0%>
-
-    <% else %>
-      <%= render 'users/signin' %>
-    <% end %>
-
-  </div>
-
-
-  <div id="main">
-    <% if flash[:notice] -%>
-        <div id="notice"><%= flash[:notice] %></div>
-    <% end -%>
-    <% if flash[:error] -%>
-        <div id="error"><%= flash[:error] %></div>
-    <% end -%>
-    <%= yield %>
-  </div>
-
-</div>
+      <div id="main">
+        <% if flash[:notice] -%>
+            <div id="notice"><%= flash[:notice] %></div>
+        <% end -%>
+        <% if flash[:error] -%>
+            <div id="error"><%= flash[:error] %></div>
+        <% end -%>
+        <%= yield %>
+      </div>
+    </div>
 </body>
 </html>

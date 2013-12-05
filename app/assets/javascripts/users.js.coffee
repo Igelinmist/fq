@@ -13,6 +13,10 @@ $ ->
   $('input[name=can_correct_filial_data]').attr('checked',true) if (grants & 64) == 64
   $('input[name=can_view_filial_report]').attr('checked',true) if (grants & 128) == 128
   $('input[name=can_administrate_users]').attr('checked',true) if (grants & 256) == 256
+  $('input[name=can_use_coil]').attr('checked',true) if (grants & 512) == 512
+  $('input[name=can_use_gaz]').attr('checked',true) if (grants & 1024) == 1024
+  $('input[name=can_use_masut]').attr('checked',true) if (grants & 2048) == 2048
+
 
   $('input:checkbox').click( ->
 

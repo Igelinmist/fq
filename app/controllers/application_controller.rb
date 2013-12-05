@@ -5,8 +5,9 @@ class ApplicationController < ActionController::Base
 
   protected
   def authorize
-    if User.find_by_id(session[:user_id])
-      @user = User.find(session[:user_id])
+    unless User.find_by_id(session[:user_id])
+      redirect_to controller: 'home', action: 'index'
+      flash[:error] = 'Пожалуйста пройдите авторизацию'
     end
   end
 end

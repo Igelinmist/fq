@@ -1,12 +1,15 @@
 #encoding: utf-8
 class UsersController < ApplicationController
+  skip_before_filter :authorize, only: :login
   # GET /users
   # GET /users.json
   def index
     @users = User.all
+    @page_title = 'Управление топлива и транспорта'
+    @user = User.find(session[:user_id])
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html {redirect_to(controller: 'users', action: 'home') if @user.grants & 256 == 0}
       format.json { render json: @users }
     end
   end
@@ -84,12 +87,16 @@ class UsersController < ApplicationController
 
   def home
     @page_title = 'Управление топлива и транспорта'
+    @user = User.find(session[:user_id])
   end
 
   def login
     user = User.find_by_login(params[:login])
     if user and user.authenticate(params[:password])
       session[:user_id] = user.id
+      user.last_login = Time.now
+      user.login_count +=1
+      user.save
       redirect_to controller: 'users', action: 'home'
     else
       redirect_to controller: 'home', action: 'index'
