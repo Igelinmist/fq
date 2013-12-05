@@ -3,8 +3,10 @@ class MasutAssaysController < ApplicationController
   # GET /masut_assays
   # GET /masut_assays.json
   def index
-    @masut_assays = MasutAssay.all
     @page_title = 'Перечень проб мазута'
+    @user = User.find(session[:user_id])
+    @masut_assays = MasutAssay.order(:dttm).find_all_by_subdivision(@user.subdivision)
+
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @masut_assays }
@@ -15,7 +17,7 @@ class MasutAssaysController < ApplicationController
   # GET /masut_assays/1.json
   def show
     @masut_assay = MasutAssay.find(params[:id])
-
+    @user = User.find(session[:user_id])
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @masut_assay }
@@ -26,7 +28,8 @@ class MasutAssaysController < ApplicationController
   # GET /masut_assays/new.json
   def new
     @masut_assay = MasutAssay.new
-
+    @user = User.find(session[:user_id])
+    @masut_assay.subdivision = @user.subdivision
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @masut_assay }
@@ -36,6 +39,7 @@ class MasutAssaysController < ApplicationController
   # GET /masut_assays/1/edit
   def edit
     @masut_assay = MasutAssay.find(params[:id])
+    @user = User.find(session[:user_id])
   end
 
   # POST /masut_assays

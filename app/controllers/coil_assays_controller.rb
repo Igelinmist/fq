@@ -3,8 +3,10 @@ class CoilAssaysController < ApplicationController
   # GET /coil_assays
   # GET /coil_assays.json
   def index
-    @coil_assays = CoilAssay.all
     @page_title = 'Перечень проб угля'
+    @user = User.find(session[:user_id])
+    @coil_assays = CoilAssay.order(:dttm).find_all_by_subdivision(@user.subdivision)
+
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @coil_assays }
@@ -15,7 +17,7 @@ class CoilAssaysController < ApplicationController
   # GET /coil_assays/1.json
   def show
     @coil_assay = CoilAssay.find(params[:id])
-
+    @user = User.find(session[:user_id])
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @coil_assay }
@@ -26,7 +28,8 @@ class CoilAssaysController < ApplicationController
   # GET /coil_assays/new.json
   def new
     @coil_assay = CoilAssay.new
-
+    @user = User.find(session[:user_id])
+    @coil_assay.subdivision = @user.subdivision
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @coil_assay }
@@ -36,6 +39,7 @@ class CoilAssaysController < ApplicationController
   # GET /coil_assays/1/edit
   def edit
     @coil_assay = CoilAssay.find(params[:id])
+    @user = User.find(session[:user_id])
   end
 
   # POST /coil_assays
