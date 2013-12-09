@@ -1,0 +1,5 @@
+<h1>Отчет по качественным анализам топлива</h1>
+<h2><%= "период отчета: с #{@report_dates[:start_date].strftime("%d.%m.%Y")} по #{@report_dates[:end_date].strftime("%d.%m.%Y")}"  %></h2>
+<%= render 'coil_band' if @coil_assays  %>
+<%= render 'gaz_band' if @gaz_assays %>
+<%= render 'masut_band' if @masut_assays %>

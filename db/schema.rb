@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131129064846) do
+ActiveRecord::Schema.define(:version => 20131205040452) do
 
   create_table "coil_assays", :force => true do |t|
     t.string   "subdivision"
@@ -54,13 +54,21 @@ ActiveRecord::Schema.define(:version => 20131129064846) do
     t.boolean  "is_public_info",   :default => false
   end
 
+  create_table "news", :force => true do |t|
+    t.datetime "dttm"
+    t.string   "title"
+    t.text     "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
   create_table "users", :force => true do |t|
     t.string   "login"
     t.string   "password_digest"
     t.string   "surname"
     t.string   "name"
     t.string   "subdivision"
-    t.integer  "login_count"
+    t.integer  "login_count",     :default => 0
     t.datetime "created_at",                     :null => false
     t.datetime "updated_at",                     :null => false
     t.datetime "last_login"

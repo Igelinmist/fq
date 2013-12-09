@@ -22,7 +22,18 @@
             Администрирование
             <%= link_to('Пользователи', users_path) %>
             <% end -%>
+            <% if has_grant?(:report) %>
+                <%= form_tag controller: 'reporter', action: 'view' do %>
+                    <fieldset class="report_settings">
+                      <legend>Отчет</legend>
+                      <%= select_tag :fuel, options_for_select(['Уголь','Газ','Мазут','Все']) %>
+                      <%= select_tag :period, options_for_select(['Текущий месяц','Прошлый месяц','Текущий квартал','Текущий год']) %>
+                      <%= submit_tag('Показать') %>
+                    </fieldset>
+                <% end -%>
+            <% end -%>
         <% end -%>
+
       </div>
 
       <div id="main">

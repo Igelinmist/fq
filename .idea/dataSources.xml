@@ -3,8 +3,8 @@
   <component name="DataSourceManagerImpl" format="xml" hash="947651523">
     <data-source source="LOCAL" name="Rails fq: test" product="" version="" jdbc-version="" driver-name="" driver-version="" uuid="8bcccbe4-906f-4c01-adfe-982bb54ced5e">
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://127.0.0.1:5432/fq_test</jdbc-url>
-      <user-name>puser</user-name>
+      <jdbc-url>jdbc:postgresql:fq_test</jdbc-url>
+      <user-name>fq</user-name>
       <user-password>df9bdf98df99df9e</user-password>
       <libraries>
         <library>
@@ -17,7 +17,7 @@
     </data-source>
     <data-source source="LOCAL" name="Rails fq: development" product="" version="" jdbc-version="" driver-name="" driver-version="" uuid="06d89a8e-6efb-4e3f-be67-308dee731553">
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://127.0.0.1:5432/fq</jdbc-url>
+      <jdbc-url>jdbc:postgresql:fq</jdbc-url>
       <user-name>puser</user-name>
       <user-password>df9bdf98df99df9e</user-password>
       <libraries>

@@ -1,4 +1,5 @@
 #encoding: utf-8
+
 class UsersController < ApplicationController
   skip_before_filter :authorize, only: :login
   # GET /users
@@ -108,5 +109,26 @@ class UsersController < ApplicationController
     session[:user_id] = nil
     flash[:notice] = 'Сеанс работы завершен'
     redirect_to controller: 'home', action: 'index'
+  end
+
+
+  def report
+    @user = User.find(session[:user_id])
+    @dt = get_date_hash(params[:period])
+
+
+  end
+
+  protected
+
+  def get_date_hash(text_period)
+    dt={}
+    if text_period == 'Текущий месяц'
+      dt2=Date.today
+      dt1=Date.new(dt2.year,dt2.month,1)
+      dt = {start_day: dt1, end_date: dt2}
+    end
+    dt
+
   end
 end

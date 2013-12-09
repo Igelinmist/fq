@@ -1,0 +1,26 @@
+<h3>Отчет по мазуту</h3>
+<table>
+  <tr>
+    <th>Структурное<br/>подразделение</th>
+    <th>Дата время</th>
+    <th>Плотность</th>
+    <th>Влага</th>
+    <th>Сера</th>
+    <th>Температура<br/>вспышки</th>
+    <th>Зола</th>
+    <th>Низшая рабочая<br/>теплота сгорания</th>
+  </tr>
+
+  <% @masut_assays.each do |masut_assay| %>
+      <tr>
+        <td><%= masut_assay.subdivision %></td>
+        <td><%= masut_assay.dttm.strftime("%d.%m.%Y %H:%M") %></td>
+        <td><%= masut_assay.density %></td>
+        <td><%= masut_assay.moisture %></td>
+        <td><%= masut_assay.sera %></td>
+        <td><%= masut_assay.flash_point %></td>
+        <td><%= masut_assay.ash %></td>
+        <td><%= masut_assay.ncv %></td>
+      </tr>
+  <% end %>
+</table>

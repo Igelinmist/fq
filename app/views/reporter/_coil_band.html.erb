@@ -1,0 +1,28 @@
+<h3>Отчет по углю</h3>
+<table>
+  <tr>
+    <th>Структурное<br/>подразделение</th>
+    <th>Дата время</th>
+    <th>Номер<br/>маршрута</th>
+    <th>Влага<br/>рабочая<br/>(%)</th>
+    <th>Зольность<br/>рабочего<br/>топлива<br/>(%)</th>
+    <th>Зольность<br/>сухого<br/>топлива<br/>(%)</th>
+    <th>Выход<br/>летучих<br/>веществ<br/>(%)</th>
+    <th>Выход<br/>серы<br/>(%)</th>
+    <th>Низшая теплота<br/>сгорания<br/>(ккал/кг)</th>
+  </tr>
+
+  <% @coil_assays.each do |coil_assay| %>
+      <tr>
+        <td><%= coil_assay.subdivision %></td>
+        <td><%= coil_assay.dttm.strftime("%d.%m.%Y %H:%M") %></td>
+        <td><%= coil_assay.route %></td>
+        <td><%= coil_assay.moisture %></td>
+        <td><%= coil_assay.wf_ash %></td>
+        <td><%= coil_assay.df_ash %></td>
+        <td><%= coil_assay.letuch %></td>
+        <td><%= coil_assay.sera %></td>
+        <td><%= coil_assay.ncv %></td>
+      </tr>
+  <% end %>
+</table>

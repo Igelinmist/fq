@@ -21,6 +21,17 @@ $ ->
   $('input:checkbox').click( ->
 
     grants = 0
+    if ($(this).attr('name') == 'can_edit_subdivision_data') and ($(this).prop('checked'))
+      $('input[name=can_read_subdivision_data]').attr('checked',true)
+      $('input[name=can_correct_subdivision_data]').attr('checked',true)
+    if ($(this).attr('name') == 'can_correct_subdivision_data') and ($(this).prop('checked'))
+      $('input[name=can_read_subdivision_data]').attr('checked',true)
+    if ($(this).attr('name') == 'can_edit_filial_data') and ($(this).prop('checked'))
+      $('input[name=can_read_filial_data]').attr('checked',true)
+      $('input[name=can_correct_filial_data]').attr('checked',true)
+    if ($(this).attr('name') == 'can_correct_filial_data') and ($(this).prop('checked'))
+      $('input[name=can_read_filial_data]').attr('checked',true)
+
     $('input:checked').each( ->
 
       grants |= Number($(this).val())

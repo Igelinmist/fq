@@ -70,7 +70,6 @@
     width: 13em;
     background: #141;
     color: #bfb;
-
     ul {
       padding: 0;
 
@@ -84,5 +83,11 @@
         }
       }
     }
+  }
+  #news {
+    background:yellow;
+    width:250px;
+    height:280px;
+    float: right;
   }
 }

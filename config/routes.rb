@@ -1,5 +1,10 @@
 Fq::Application.routes.draw do
 
+  post "reporter/view"
+
+  resources :news
+
+
   match 'home' => 'home#index'
 
   #controller :sessions do

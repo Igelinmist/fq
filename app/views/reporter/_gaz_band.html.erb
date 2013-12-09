@@ -1,0 +1,16 @@
+<h3>Отчет по газу</h3>
+<table>
+  <tr>
+    <th>Структурное<br/>подразделение</th>
+    <th>Дата время</th>
+    <th>Низшая теплота<br/>сгорания (ккал/кг)</th>
+  </tr>
+
+  <% @gaz_assays.each do |gaz_assay| %>
+      <tr>
+        <td><%= gaz_assay.subdivision %></td>
+        <td><%= gaz_assay.dttm.strftime("%d.%m.%Y %H:%M") %></td>
+        <td><%= gaz_assay.ncv %></td>
+      </tr>
+  <% end %>
+</table>
