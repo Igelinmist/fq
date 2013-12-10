@@ -3,10 +3,14 @@ class MasutAssaysController < ApplicationController
   # GET /masut_assays
   # GET /masut_assays.json
   def index
-    @page_title = 'Перечень проб мазута'
+    @page_title = 'Перечень анализов качества мазута'
     @user = User.find(session[:user_id])
-    @masut_assays = MasutAssay.order(:dttm).find_all_by_subdivision(@user.subdivision)
-
+    case @user.subdivision
+      when 'ТЭЦ-2','ТЭЦ-3','ТЭЦ-4','ТЭЦ-5','КРК'
+        @masut_assays = MasutAssay.order(:dttm).find_all_by_subdivision(@user.subdivision)
+      else
+        @masut_assays = MasutAssay.order(:dttm).all
+    end
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @masut_assays }
@@ -49,7 +53,7 @@ class MasutAssaysController < ApplicationController
 
     respond_to do |format|
       if @masut_assay.save
-        format.html { redirect_to masut_assays_url, notice: 'Masut assay was successfully created.' }
+        format.html { redirect_to masut_assays_url, notice: 'Данные нового анализа мазута успешно записаны.' }
         format.json { render json: @masut_assay, status: :created, location: @masut_assay }
       else
         format.html { render action: "new" }
@@ -65,7 +69,7 @@ class MasutAssaysController < ApplicationController
 
     respond_to do |format|
       if @masut_assay.update_attributes(params[:masut_assay])
-        format.html { redirect_to masut_assays_url, notice: 'Masut assay was successfully updated.' }
+        format.html { redirect_to masut_assays_url, notice: 'Данные анализа качества мазута успешно скорректированы.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

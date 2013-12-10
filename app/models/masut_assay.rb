@@ -8,15 +8,15 @@ class MasutAssay < ActiveRecord::Base
   def self.za_period(period_rus)
     case period_rus
       when 'Текущий месяц'
-        where(dttm: Time.now.at_beginning_of_month .. Time.now).order(:dttm)
+        where(dttm: Date.today.at_beginning_of_month .. Date.tomorrow).order(:dttm)
       when 'Прошлый месяц'
-        where(dttm: Time.now.months_ago(1).at_beginning_of_month .. Time.now.months_ago(1).end_of_month).order(:dttm)
+        where(dttm: Date.today.months_ago(1).at_beginning_of_month .. Date.today.at_beginning_of_month).order(:dttm)
       when 'Текущий квартал'
-        where(dttm: Time.now.at_beginning_of_quarter .. Time.now).order(:dttm)
+        where(dttm: Date.today.at_beginning_of_quarter .. Date.tomorrow).order(:dttm)
       when 'Текущий год'
-        where(dttm: Time.now.at_beginning_of_year .. Time.now).order(:dttm)
+        where(dttm: Date.today.at_beginning_of_year .. Date.tomorrow).order(:dttm)
       else
-        where(dttm: Time.now.at_beginning_of_day .. Time.now).order(:dttm)
+        where(dttm: Date.today .. Time.now).order(:dttm)
     end
   end
 
@@ -25,7 +25,7 @@ class MasutAssay < ActiveRecord::Base
       when 'ТЭЦ-2','ТЭЦ-3','ТЭЦ-4','ТЭЦ-5','КРК'
         where(subdivision: sp_name_rus)
       else
-        where
+        all
     end
   end
 end

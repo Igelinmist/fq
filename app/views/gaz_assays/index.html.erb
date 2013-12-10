@@ -7,13 +7,13 @@
   </tr>
 
 <% @gaz_assays.each do |gaz_assay| %>
-  <tr>
+  <tr <%= 'id=suplier_data' if gaz_assay.is_suplier_assay %>>
     <td><%= gaz_assay.subdivision %></td>
     <td><%= gaz_assay.dttm.strftime("%d.%m.%Y %H:%M") %></td>
     <td><%= gaz_assay.ncv %></td>
     <td>
-      <%= link_to image_tag("edit_wb.png",:size => "16x16", :alt => "Править", :title => "Править"), edit_gaz_assay_path(gaz_assay) %>
-      <%= link_to image_tag("delete_wb.png",:size => "16x16", :alt => "Удалить", :title =>"Удалить"), gaz_assay, method: :delete, data: { confirm: 'Вы уверены?' } %>
+      <%= link_to image_tag("edit_wb.png",:size => "16x16", :alt => "Править", :title => "Править"), edit_gaz_assay_path(gaz_assay) if grant_for_action(gaz_assay.is_suplier_assay)[:can_edit]%>
+      <%= link_to image_tag("delete_wb.png",:size => "16x16", :alt => "Удалить", :title =>"Удалить"), gaz_assay, method: :delete, data: { confirm: 'Вы уверены?' } if grant_for_action(gaz_assay.is_suplier_assay)[:can_delete]%>
     </td>
   </tr>
 <% end %>
@@ -21,4 +21,4 @@
 
 <br />
 
-<%= link_to 'Ввести данные новой пробы', new_gaz_assay_path %>
+<%= link_to 'Ввести данные новой пробы', new_gaz_assay_path  if grant_for_new_assay? %>

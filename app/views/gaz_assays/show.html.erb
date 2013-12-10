@@ -1,20 +1,24 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Subdivision:</b>
+  <b>Структурное подразделение:</b>
   <%= @gaz_assay.subdivision %>
 </p>
 
 <p>
-  <b>Dttm:</b>
+  <b>Дата время:</b>
   <%= @gaz_assay.dttm %>
 </p>
 
 <p>
-  <b>Ncv:</b>
+  <b>Низшая теплота сгорания:</b>
   <%= @gaz_assay.ncv %>
 </p>
 
+<p>
+  <b>Признак данных поставщика:</b>
+  <%= @gaz_assay.is_suplier_assay %>
+</p>
 
 <%= link_to 'Edit', edit_gaz_assay_path(@gaz_assay) %> |
 <%= link_to 'Back', gaz_assays_path %>

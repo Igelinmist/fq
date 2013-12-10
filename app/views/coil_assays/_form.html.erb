@@ -11,6 +11,8 @@
     </div>
   <% end %>
 
+  <%= f.hidden_field :is_suplier_assay %>
+
   <div class="field">
     <%= f.label 'Структурное подразделение:' %><br />
     <%= f.select :subdivision, ['ТЭЦ-2','ТЭЦ-4','ТЭЦ-5'], include_blank: :true %>

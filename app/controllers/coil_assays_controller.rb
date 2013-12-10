@@ -1,12 +1,17 @@
 #encoding: utf-8
 class CoilAssaysController < ApplicationController
+  include UsersHelper
   # GET /coil_assays
   # GET /coil_assays.json
   def index
-    @page_title = 'Перечень проб угля'
+    @page_title = 'Перечень анализов качества угля'
     @user = User.find(session[:user_id])
-    @coil_assays = CoilAssay.order(:dttm).find_all_by_subdivision(@user.subdivision)
-
+    case @user.subdivision
+      when 'ТЭЦ-2','ТЭЦ-4','ТЭЦ-5'
+        @coil_assays = CoilAssay.order(:dttm).find_all_by_subdivision(@user.subdivision)
+      else
+        @coil_assays = CoilAssay.order(:dttm).all
+    end
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @coil_assays }
@@ -30,6 +35,8 @@ class CoilAssaysController < ApplicationController
     @coil_assay = CoilAssay.new
     @user = User.find(session[:user_id])
     @coil_assay.subdivision = @user.subdivision
+    @coil_assay.is_suplier_assay = true if (has_grant?(:edit_filial) || has_grant?(:correct_filial))
+
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @coil_assay }
@@ -49,7 +56,7 @@ class CoilAssaysController < ApplicationController
 
     respond_to do |format|
       if @coil_assay.save
-        format.html { redirect_to coil_assays_url, notice: 'Coil assay was successfully created.' }
+        format.html { redirect_to coil_assays_url, notice: 'Данные нового анализа угля были успешно записаны.' }
         format.json { render json: @coil_assay, status: :created, location: @coil_assay }
       else
         format.html { render action: "new" }
@@ -65,7 +72,7 @@ class CoilAssaysController < ApplicationController
 
     respond_to do |format|
       if @coil_assay.update_attributes(params[:coil_assay])
-        format.html { redirect_to coil_assays_url, notice: 'Coil assay was successfully updated.' }
+        format.html { redirect_to coil_assays_url, notice: 'Данные нового анализа угля были успешно скорректированы.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
