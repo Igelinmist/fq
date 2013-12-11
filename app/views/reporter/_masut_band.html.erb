@@ -12,7 +12,7 @@
   </tr>
 
   <% @masut_assays.each do |masut_assay| %>
-      <tr>
+      <tr <%= 'id=suplier_data' if masut_assay.is_suplier_assay %>>
         <td><%= masut_assay.subdivision %></td>
         <td><%= masut_assay.dttm.strftime("%d.%m.%Y %H:%M") %></td>
         <td><%= masut_assay.density %></td>

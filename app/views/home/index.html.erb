@@ -1,5 +1,19 @@
+
 <div id="news">
-  Блок новостей:
+  <div id="news_block_title">
+    Блок новостей:<br />
+  </div>
+  <% @news.each do |news| %>
+    <div id="news_time">
+      <%= news.dttm.localtime.strftime('%d.%m.%Y %H:%M') %>
+    </div>
+    <div id="news_title">
+      <%= news.title %>
+    </div>
+    <div id="news_description">
+      <%== news.description %>
+    </div>
+  <% end %>
 </div>
 <h1>Домашняя страница интранет приложения</h1>
 <p>ToDo: Добавить контент для этой страницы...</p>

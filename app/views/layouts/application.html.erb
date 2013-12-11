@@ -11,18 +11,21 @@
     <%= render 'home/header' %>
     <div id="columns">
       <div id="menu">
-        <% if user=session[:user_id]  -%>
-            <%= 'Результаты качественного анализа:' if (has_grant?(:index) || has_grant?(:edit) || has_grant?(:correct))%>
+        <% if session[:user_id]  -%>
+            <%= 'Результаты качественного анализа:' if (has_grant?(:index,@user) || has_grant?(:edit,@user) || has_grant?(:correct,@user))%>
             <ul>
-              <li><%= link_to 'Уголь', coil_assays_path if has_fuel?(:coil) %></li>
-              <li><%= link_to 'Газ', gaz_assays_path if has_fuel?(:gaz) %></li>
-              <li><%= link_to 'Мазут', masut_assays_path if has_fuel?(:masut) %></li>
+              <li><%= link_to 'Уголь', coil_assays_path if has_fuel?(:coil,@user) %></li>
+              <li><%= link_to 'Газ', gaz_assays_path if has_fuel?(:gaz,@user) %></li>
+              <li><%= link_to 'Мазут', masut_assays_path if has_fuel?(:masut,@user) %></li>
             </ul>
             <% if (@user.grants & 256) > 0 -%>
-            Администрирование
-            <%= link_to('Пользователи', users_path) %>
+                Администрирование
+                <ul>
+                  <li><%= link_to('Пользователи', users_path) %></li>
+                  <li><%= link_to('Новости', news_index_path) %></li>
+                </ul>
             <% end -%>
-            <% if has_grant?(:report) %>
+            <% if has_grant?(:report,@user) %>
                 <%= form_tag controller: 'reporter', action: 'view' do %>
                     <fieldset class="report_settings">
                       <legend>Отчет</legend>

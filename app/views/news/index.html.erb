@@ -1,27 +1,26 @@
-<h1>Listing news</h1>
+<h1>Список новостей</h1>
 
 <table>
   <tr>
-    <th>Dttm</th>
-    <th>Title</th>
-    <th>Description</th>
-    <th></th>
-    <th></th>
+    <th>Дата время</th>
+    <th>Заголовок</th>
+    <th>Описание</th>
     <th></th>
   </tr>
 
 <% @news.each do |news| %>
   <tr>
-    <td><%= news.dttm.localtime %></td>
+    <td><%= news.dttm.localtime.strftime('%d.%m.%Y %H:%M') %></td>
     <td><%= news.title %></td>
-    <td><%= news.description %></td>
-    <td><%= link_to 'Show', news %></td>
-    <td><%= link_to 'Edit', edit_news_path(news) %></td>
-    <td><%= link_to 'Destroy', news, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><div id="description"><%== news.description %></div></td>
+    <td>
+      <%= link_to image_tag("okular.png",:size => "16x16", :alt => "Смотреть",:title => "Смотреть"), news %>
+      <%= link_to image_tag("edit_wb.png",:size => "16x16", :alt => "Править", :title => "Править"), edit_news_path(news) %>
+      <%= link_to image_tag("delete_wb.png",:size => "16x16", :alt => "Удалить", :title =>"Удалить"), news, method: :delete, data: { confirm: 'Вы уверены?' } %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New News', new_news_path %>
+<%= link_to 'Создать новую новостную запись', new_news_path %>

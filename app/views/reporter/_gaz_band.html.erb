@@ -7,7 +7,7 @@
   </tr>
 
   <% @gaz_assays.each do |gaz_assay| %>
-      <tr>
+      <tr <%= 'id=suplier_data' if gaz_assay.is_suplier_assay %>>
         <td><%= gaz_assay.subdivision %></td>
         <td><%= gaz_assay.dttm.strftime("%d.%m.%Y %H:%M") %></td>
         <td><%= gaz_assay.ncv %></td>

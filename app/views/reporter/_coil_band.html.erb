@@ -13,7 +13,7 @@
   </tr>
 
   <% @coil_assays.each do |coil_assay| %>
-      <tr>
+      <tr <%= 'id=suplier_data' if coil_assay.is_suplier_assay %>>
         <td><%= coil_assay.subdivision %></td>
         <td><%= coil_assay.dttm.strftime("%d.%m.%Y %H:%M") %></td>
         <td><%= coil_assay.route %></td>

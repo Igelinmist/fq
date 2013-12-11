@@ -1,20 +1,20 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Dttm:</b>
+  <b>Дата время:</b>
   <%= @news.dttm %>
 </p>
 
 <p>
-  <b>Title:</b>
+  <b>Заголовок:</b>
   <%= @news.title %>
 </p>
 
 <p>
-  <b>Description:</b>
-  <%= @news.description %>
+  <b>Описание:</b>
+  <%== @news.description %>
 </p>
 
 
-<%= link_to 'Edit', edit_news_path(@news) %> |
-<%= link_to 'Back', news_index_path %>
+<%= link_to 'Править', edit_news_path(@news) %> |
+<%= link_to 'К списку новостей', news_index_path %>

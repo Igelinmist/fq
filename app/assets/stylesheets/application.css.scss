@@ -34,7 +34,9 @@
   text-align:   right;
   float: right;
 }
-
+#suplier_data {
+  background-color: #9ec688;
+}
 
 #notice {
   color: #000 !important;
@@ -78,16 +80,11 @@
 
         font-size: small;
         a {
-          color: #bfb;
+          color: #edffbc;
           font-size: small;
         }
       }
     }
   }
-  #news {
-    background:yellow;
-    width:250px;
-    height:280px;
-    float: right;
-  }
+
 }

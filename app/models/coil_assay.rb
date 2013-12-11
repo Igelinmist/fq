@@ -23,9 +23,9 @@ class CoilAssay < ActiveRecord::Base
   def self.filter_sp(sp_name_rus)
     case sp_name_rus
       when 'ТЭЦ-2','ТЭЦ-3','ТЭЦ-4','ТЭЦ-5','КРК'
-        where(subdivision: sp_name_rus)
+        where(subdivision: sp_name_rus).order(:dttm, :is_suplier_assay)
       else
-        all
+        order(:subdivision, :is_suplier_assay,:dttm)
     end
   end
 

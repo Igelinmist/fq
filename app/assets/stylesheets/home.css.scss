@@ -1,3 +1,20 @@
 // Place all the styles related to the home controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.home {
+  font-size: 10px;
+  #news {
+    background: #fff9a8;
+    width:300px;
+    float: right;
+  }
+  #news_description {
+
+  }
+  #news_time {
+    font-style: italic;
+  }
+  #news_title {
+    font-weight: bold;
+  }
+}

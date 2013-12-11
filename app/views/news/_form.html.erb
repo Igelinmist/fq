@@ -12,18 +12,18 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :dttm %><br />
+    <%= f.label 'Дата время' %><br />
     <%= f.datetime_select :dttm %>
   </div>
   <div class="field">
-    <%= f.label :title %><br />
+    <%= f.label 'Заголовок' %><br />
     <%= f.text_field :title %>
   </div>
   <div class="field">
-    <%= f.label :description %><br />
+    <%= f.label 'Описание' %><br />
     <%= f.text_area :description %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit 'Применить' %>
   </div>
 <% end %>

@@ -53,7 +53,7 @@ class CoilAssaysController < ApplicationController
   # POST /coil_assays.json
   def create
     @coil_assay = CoilAssay.new(params[:coil_assay])
-
+    @user = User.find(session[:user_id])
     respond_to do |format|
       if @coil_assay.save
         format.html { redirect_to coil_assays_url, notice: 'Данные нового анализа угля были успешно записаны.' }
@@ -69,7 +69,7 @@ class CoilAssaysController < ApplicationController
   # PUT /coil_assays/1.json
   def update
     @coil_assay = CoilAssay.find(params[:id])
-
+    @user = User.find(session[:user_id])
     respond_to do |format|
       if @coil_assay.update_attributes(params[:coil_assay])
         format.html { redirect_to coil_assays_url, notice: 'Данные нового анализа угля были успешно скорректированы.' }
