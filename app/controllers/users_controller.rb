@@ -7,10 +7,10 @@ class UsersController < ApplicationController
   def index
     @users = User.all
     @page_title = 'Управление топлива и транспорта'
-    @user = User.find(session[:user_id])
+    @authorized_user = User.find(session[:user_id])
 
     respond_to do |format|
-      format.html {redirect_to(controller: 'users', action: 'home') if @user.grants & 256 == 0}
+      format.html {redirect_to(controller: 'users', action: 'home') if @authorized_user.grants & 256 == 0}
       format.json { render json: @users }
     end
   end
@@ -19,7 +19,7 @@ class UsersController < ApplicationController
   # GET /users/1.json
   def show
     @user = User.find(params[:id])
-
+    @authorized_user = User.find(session[:user_id])
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @user }
@@ -30,6 +30,7 @@ class UsersController < ApplicationController
   # GET /users/new.json
   def new
     @user = User.new
+    @authorized_user = User.find(session[:user_id])
     @page_title = 'Регистрация нового пользователя'
     respond_to do |format|
       format.html # new.html.erb
@@ -40,6 +41,7 @@ class UsersController < ApplicationController
   # GET /users/1/edit
   def edit
     @user = User.find(params[:id])
+    @authorized_user = User.find(session[:user_id])
   end
 
   # POST /users
@@ -88,7 +90,7 @@ class UsersController < ApplicationController
 
   def home
     @page_title = 'Управление топлива и транспорта'
-    @user = User.find(session[:user_id])
+    @authorized_user = User.find(session[:user_id])
   end
 
   def login
@@ -113,7 +115,7 @@ class UsersController < ApplicationController
 
 
   def report
-    @user = User.find(session[:user_id])
+    @authorized_user = User.find(session[:user_id])
     @dt = get_date_hash(params[:period])
 
 

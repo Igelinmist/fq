@@ -4,10 +4,10 @@ class MasutAssaysController < ApplicationController
   # GET /masut_assays.json
   def index
     @page_title = 'Перечень анализов качества мазута'
-    @user = User.find(session[:user_id])
-    case @user.subdivision
+    @authorized_user = User.find(session[:user_id])
+    case @authorized_user.subdivision
       when 'ТЭЦ-2','ТЭЦ-3','ТЭЦ-4','ТЭЦ-5','КРК'
-        @masut_assays = MasutAssay.order(:dttm).find_all_by_subdivision(@user.subdivision)
+        @masut_assays = MasutAssay.order(:dttm).find_all_by_subdivision(@authorized_user.subdivision)
       else
         @masut_assays = MasutAssay.order(:dttm).all
     end
@@ -21,7 +21,7 @@ class MasutAssaysController < ApplicationController
   # GET /masut_assays/1.json
   def show
     @masut_assay = MasutAssay.find(params[:id])
-    @user = User.find(session[:user_id])
+    @authorized_user = User.find(session[:user_id])
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @masut_assay }
@@ -32,8 +32,8 @@ class MasutAssaysController < ApplicationController
   # GET /masut_assays/new.json
   def new
     @masut_assay = MasutAssay.new
-    @user = User.find(session[:user_id])
-    @masut_assay.subdivision = @user.subdivision
+    @authorized_user = User.find(session[:user_id])
+    @masut_assay.subdivision = @authorized_user.subdivision
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @masut_assay }
@@ -43,7 +43,7 @@ class MasutAssaysController < ApplicationController
   # GET /masut_assays/1/edit
   def edit
     @masut_assay = MasutAssay.find(params[:id])
-    @user = User.find(session[:user_id])
+    @authorized_user = User.find(session[:user_id])
   end
 
   # POST /masut_assays
@@ -66,7 +66,7 @@ class MasutAssaysController < ApplicationController
   # PUT /masut_assays/1.json
   def update
     @masut_assay = MasutAssay.find(params[:id])
-
+    @authorized_user = User.find(session[:user_id])
     respond_to do |format|
       if @masut_assay.update_attributes(params[:masut_assay])
         format.html { redirect_to masut_assays_url, notice: 'Данные анализа качества мазута успешно скорректированы.' }

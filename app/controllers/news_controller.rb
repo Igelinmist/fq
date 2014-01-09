@@ -3,7 +3,7 @@ class NewsController < ApplicationController
   # GET /news.json
   def index
     @news = News.all
-    @user = User.find(session[:user_id])
+    @authorized_user = User.find(session[:user_id])
 
     respond_to do |format|
       format.html # index.html.erb
@@ -15,7 +15,7 @@ class NewsController < ApplicationController
   # GET /news/1.json
   def show
     @news = News.find(params[:id])
-    @user = User.find(session[:user_id])
+    @authorized_user = User.find(session[:user_id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -27,7 +27,7 @@ class NewsController < ApplicationController
   # GET /news/new.json
   def new
     @news = News.new
-    @user = User.find(session[:user_id])
+    @authorized_user = User.find(session[:user_id])
 
     respond_to do |format|
       format.html # new.html.erb
@@ -38,7 +38,7 @@ class NewsController < ApplicationController
   # GET /news/1/edit
   def edit
     @news = News.find(params[:id])
-    @user = User.find(session[:user_id])
+    @authorized_user = User.find(session[:user_id])
   end
 
   # POST /news

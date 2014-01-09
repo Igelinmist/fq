@@ -12,20 +12,20 @@
     <div id="columns">
       <div id="menu">
         <% if session[:user_id]  -%>
-            <%= 'Результаты качественного анализа:' if (has_grant?(:index,@user) || has_grant?(:edit,@user) || has_grant?(:correct,@user))%>
+            <%= 'Результаты качественного анализа:' if (has_grant?(:index,@authorized_user) || has_grant?(:edit,@authorized_user) || has_grant?(:correct,@authorized_user))%>
             <ul>
-              <li><%= link_to 'Уголь', coil_assays_path if has_fuel?(:coil,@user) %></li>
-              <li><%= link_to 'Газ', gaz_assays_path if has_fuel?(:gaz,@user) %></li>
-              <li><%= link_to 'Мазут', masut_assays_path if has_fuel?(:masut,@user) %></li>
+              <li><%= link_to 'Уголь', coil_assays_path if has_fuel?(:coil,@authorized_user) %></li>
+              <li><%= link_to 'Газ', gaz_assays_path if has_fuel?(:gaz,@authorized_user) %></li>
+              <li><%= link_to 'Мазут', masut_assays_path if has_fuel?(:masut,@authorized_user) %></li>
             </ul>
-            <% if (@user.grants & 256) > 0 -%>
+            <% if (@authorized_user.grants & 256) > 0 -%>
                 Администрирование
                 <ul>
                   <li><%= link_to('Пользователи', users_path) %></li>
                   <li><%= link_to('Новости', news_index_path) %></li>
                 </ul>
             <% end -%>
-            <% if has_grant?(:report,@user) %>
+            <% if has_grant?(:report,@authorized_user) %>
                 <%= form_tag controller: 'reporter', action: 'view' do %>
                     <fieldset class="report_settings">
                       <legend>Отчет</legend>

@@ -4,7 +4,7 @@
   <div id="authorize_block">
     <% if session[:user_id]  -%>
         В системе:<br />
-        <%= "#{@user.surname} #{@user.name}"  %><br />
+        <%= "#{@authorized_user.surname} #{@authorized_user.name}"  %><br />
         <%= button_to 'Выход',logout_path, method: :delete %>
     <% else %>
         <%= render 'users/signin' %>

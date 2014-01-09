@@ -3,6 +3,6 @@ class HomeController < ApplicationController
   skip_before_filter :authorize
   def index
     @page_title = 'Управление топлива и транспорта'
-    @news = News.order(:dttm).where(dttm: Date.today.beginning_of_quarter .. Date.tomorrow)
+    @news = News.where(dttm: Date.today.beginning_of_quarter .. Date.tomorrow).order('dttm DESC')
   end
 end

@@ -1,7 +1,7 @@
 #encoding: utf-8
 class ReporterController < ApplicationController
   def view
-    @user = User.find(session[:user_id])
+    @authorized_user = User.find(session[:user_id])
     report_time = Time.now
     @coil_assays = @gaz_assays = @masut_assays = nil
     @report_dates =

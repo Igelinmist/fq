@@ -3,11 +3,11 @@ class GazAssaysController < ApplicationController
   # GET /gaz_assays
   # GET /gaz_assays.json
   def index
-    @user = User.find(session[:user_id])
+    @authorized_user = User.find(session[:user_id])
     @page_title = 'Перечень анализов качества газа'
-    case @user.subdivision
+    case @authorized_user.subdivision
       when 'ТЭЦ-2','ТЭЦ-3','ТЭЦ-4','КРК'
-        @gaz_assays = GazAssay.order(:dttm).find_all_by_subdivision(@user.subdivision)
+        @gaz_assays = GazAssay.order(:dttm).find_all_by_subdivision(@authorized_user.subdivision)
       else
         @gaz_assays = GazAssay.order(:dttm).all
     end
@@ -21,7 +21,7 @@ class GazAssaysController < ApplicationController
   # GET /gaz_assays/1.json
   def show
     @gaz_assay = GazAssay.find(params[:id])
-
+    @authorized_user = User.find(session[:user_id])
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @gaz_assay }
@@ -32,8 +32,8 @@ class GazAssaysController < ApplicationController
   # GET /gaz_assays/new.json
   def new
     @gaz_assay = GazAssay.new
-    @user = User.find(session[:user_id])
-    @gaz_assay.subdivision = @user.subdivision
+    @authorized_user = User.find(session[:user_id])
+    @gaz_assay.subdivision = @authorized_user.subdivision
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @gaz_assay }
@@ -43,13 +43,14 @@ class GazAssaysController < ApplicationController
   # GET /gaz_assays/1/edit
   def edit
     @gaz_assay = GazAssay.find(params[:id])
+    @authorized_user = User.find(session[:user_id])
   end
 
   # POST /gaz_assays
   # POST /gaz_assays.json
   def create
     @gaz_assay = GazAssay.new(params[:gaz_assay])
-
+    @authorized_user = User.find(session[:user_id])
     respond_to do |format|
       if @gaz_assay.save
         format.html { redirect_to gaz_assays_url, notice: 'Данные нового анализа газа успешно записаны.' }
@@ -65,7 +66,7 @@ class GazAssaysController < ApplicationController
   # PUT /gaz_assays/1.json
   def update
     @gaz_assay = GazAssay.find(params[:id])
-
+    @authorized_user = User.find(session[:user_id])
     respond_to do |format|
       if @gaz_assay.update_attributes(params[:gaz_assay])
         format.html { redirect_to gaz_assays_url, notice: 'Данные качественного анализа газа успешно скорректированы.' }
