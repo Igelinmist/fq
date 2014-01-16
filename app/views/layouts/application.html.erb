@@ -11,7 +11,7 @@
     <%= render 'home/header' %>
     <div id="columns">
       <div id="menu">
-        <% if session[:user_id]  -%>
+        <% if @authorized_user  -%>
             <%= 'Результаты качественного анализа:' if (has_grant?(:index,@authorized_user) || has_grant?(:edit,@authorized_user) || has_grant?(:correct,@authorized_user))%>
             <ul>
               <li><%= link_to 'Уголь', coil_assays_path if has_fuel?(:coil,@authorized_user) %></li>

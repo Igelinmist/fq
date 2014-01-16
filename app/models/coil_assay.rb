@@ -1,7 +1,8 @@
 #encoding: utf-8
 class CoilAssay < ActiveRecord::Base
   validates_presence_of :dttm, :subdivision
-  attr_accessible :df_ash, :dttm, :letuch, :moisture, :ncv, :route, :sera, :subdivision, :wf_ash, :is_suplier_assay,:is_public_info
+  attr_accessible :dttm,:subdivision,:is_suplier_assay,:is_public_info,:route,:w_r_t,:a_r,:a_d,:v_daf,:s_a,:q_r_i,:w_a,
+                  :a_a,:q_a_b,:q_d_s,:q_daf_s,:v_a,:h_a, :protocol_num, :coil_class, :supplier
 
   scope :public_data, -> {where :is_public_info => true}
 

@@ -1,0 +1,36 @@
+.paper {
+  table {
+    width: 540pt;
+    border: 1pt solid #000000;
+    border-collapse: collapse; /* Отображать только одинарные линии */
+  }
+  th {
+    text-align: center; /* Выравнивание по левому краю */
+    vertical-align: top;
+    background: #ccc; /* Цвет фона ячеек */
+    padding: 5pt; /* Поля вокруг содержимого ячеек */
+    border: 1pt solid black; /* Граница вокруг ячеек */
+  }
+  td {
+    padding: 5pt; /* Поля вокруг содержимого ячеек */
+    border: 1pt solid black; /* Граница вокруг ячеек */
+    text-align: center;
+  }
+  td.align_left {
+    text-align: left;
+  }
+
+  .form_title {
+    margin-left: 180pt;
+  }
+  table.sign {
+    td {
+      text-align: left;
+      border: none;
+    }
+    tr {
+      height: 40pt;
+    }
+    border: none;
+  }
+}

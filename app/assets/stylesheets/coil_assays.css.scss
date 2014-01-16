@@ -22,5 +22,26 @@
   #suplier_data {
     background-color: #9ec688;
   }
+  .form_title {
+    margin-left: 200px;
+  }
+  fieldset.common_data {
+    .field {
+      clear: both;
+      text-align: right;
+    }
+    label {
+      float: left;
+      color: #000000;
+    }
+    input {
+      clear: both;
+      vertical-align: middle;
+    }
+    width: 420px;
+  }
+  .asset_table {
+    width: 730px;
+  }
 
 }

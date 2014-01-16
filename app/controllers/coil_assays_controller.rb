@@ -4,7 +4,7 @@ class CoilAssaysController < ApplicationController
   # GET /coil_assays
   # GET /coil_assays.json
   def index
-    @page_title = 'Перечень анализов качества угля'
+    @page_title = 'Перечень анализов проб угля'
     @authorized_user = User.find(session[:user_id])
     case @authorized_user.subdivision
       when 'ТЭЦ-2','ТЭЦ-4','ТЭЦ-5'
@@ -21,10 +21,12 @@ class CoilAssaysController < ApplicationController
   # GET /coil_assays/1
   # GET /coil_assays/1.json
   def show
+
     @coil_assay = CoilAssay.find(params[:id])
     @authorized_user = User.find(session[:user_id])
+
     respond_to do |format|
-      format.html # show.html.erb
+      format.html {render layout: false}
       format.json { render json: @coil_assay }
     end
   end
@@ -32,6 +34,7 @@ class CoilAssaysController < ApplicationController
   # GET /coil_assays/new
   # GET /coil_assays/new.json
   def new
+    @page_title = 'Ввод данных анализа новой пробы угля'
     @coil_assay = CoilAssay.new
     @authorized_user = User.find(session[:user_id])
     @coil_assay.subdivision = @authorized_user.subdivision
@@ -45,6 +48,7 @@ class CoilAssaysController < ApplicationController
 
   # GET /coil_assays/1/edit
   def edit
+    @page_title = 'Редактирование данных анализа пробы угля'
     @coil_assay = CoilAssay.find(params[:id])
     @authorized_user = User.find(session[:user_id])
   end

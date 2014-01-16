@@ -11,22 +11,32 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131205040452) do
+ActiveRecord::Schema.define(:version => 20140109070502) do
 
   create_table "coil_assays", :force => true do |t|
     t.string   "subdivision"
     t.datetime "dttm"
     t.string   "route"
-    t.float    "moisture"
-    t.float    "wf_ash"
-    t.float    "df_ash"
-    t.float    "letuch"
-    t.float    "sera"
-    t.float    "ncv"
+    t.float    "w_r_t"
+    t.float    "a_r"
+    t.float    "a_d"
+    t.float    "v_daf"
+    t.float    "s_a"
+    t.float    "q_r_i"
     t.datetime "created_at",                          :null => false
     t.datetime "updated_at",                          :null => false
     t.boolean  "is_suplier_assay", :default => false
     t.boolean  "is_public_info",   :default => false
+    t.float    "w_a"
+    t.float    "a_a"
+    t.float    "q_a_b"
+    t.float    "q_d_s"
+    t.float    "q_daf_s"
+    t.float    "v_a"
+    t.float    "h_a"
+    t.integer  "protocol_num"
+    t.string   "coil_class"
+    t.string   "supplier"
   end
 
   create_table "gaz_assays", :force => true do |t|

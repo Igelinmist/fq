@@ -13,42 +13,142 @@
 
   <%= f.hidden_field :is_suplier_assay %>
 
-  <div class="field">
-    <%= f.label 'Структурное подразделение:' %><br />
-    <%= f.select :subdivision, ['ТЭЦ-2','ТЭЦ-4','ТЭЦ-5'], include_blank: :true %>
-  </div>
-  <div class="field">
-    <%= f.label 'Дата время:' %><br />
-    <%= f.datetime_select :dttm, use_month_numbers: true, order: [:day, :month, :year], include_seconds: false, default: start_of_hour %>
-  </div>
-  <div class="field">
-    <%= f.label 'Номер маршрута:' %><br />
-    <%= f.text_field :route %>
-  </div>
-  <div class="field">
-    <%= f.label 'Влага рабочая (%):' %><br />
-    <%= f.text_field :moisture %>
-  </div>
-  <div class="field">
-    <%= f.label 'Зольность рабочего топлива (%):' %><br />
-    <%= f.text_field :wf_ash %>
-  </div>
-  <div class="field">
-    <%= f.label 'Зольность сухого топлива (%):' %><br />
-    <%= f.text_field :df_ash %>
-  </div>
-  <div class="field">
-    <%= f.label 'Выход летучих веществ (%):' %><br />
-    <%= f.text_field :letuch %>
-  </div>
-  <div class="field">
-    <%= f.label 'Выход серы (%):' %><br />
-    <%= f.text_field :sera %>
-  </div>
-  <div class="field">
-    <%= f.label 'Низшая теплота сгорания (ккал/кг):' %><br />
-    <%= f.text_field :ncv %>
-  </div>
+    <div class="form_title">
+      <h2><%= f.label 'ПРОТОКОЛ АНАЛИЗА УГЛЯ №' %>
+      <%= f.text_field :protocol_num, size: 4 %></h2>
+    </div>
+    <fieldset class="common_data">
+      <div class="field">
+        <%= f.label 'Структурное подразделение:' %>
+        <%= f.select :subdivision, ['ТЭЦ-2','ТЭЦ-4','ТЭЦ-5'], include_blank: :true %>
+      </div>
+
+      <div class="field">
+        <%= f.label 'Проба взята (дата):' %>
+        <%= f.date_select :dttm, use_month_numbers: true, order: [:day, :month, :year] %>
+      </div>
+
+      <div class="field">
+        <%= f.label 'Марка, класс угля:' %>
+        <%= f.select :coil_class, ['КСН; класс рядовой'] %>
+      </div>
+
+      <div class="field">
+        <%= f.label 'Шахта (поставщик):' %>
+        <%= f.select :supplier, ['Экибазтуз-3; разрез Восточный'] %>
+      </div>
+
+      <div class="field">
+        <%= f.label 'Номер маршрута:' %>
+        <%= f.text_field :route %>
+      </div>
+    </fieldset>
+
+    <div class="asset_table">
+      <table>
+        <tr>
+          <th>№</th>
+          <th>Наименование показателя</th>
+          <th>Обознач.</th>
+          <th>Ед. изм.</th>
+          <th>Результат</th>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>Общая влага</td>
+          <td>W<sub>t</sub><sup>r</sup></td>
+          <td>%</td>
+          <td><%= f.text_field :w_r_t %></td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Влага аналитической пробы</td>
+          <td>W<sup>a</sup></td>
+          <td>%</td>
+          <td><%= f.text_field :w_a %></td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Зольность аналитической пробы</td>
+          <td>A<sup>a</sup></td>
+          <td>%</td>
+          <td><%= f.text_field :a_a %></td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>Зольность на рабочую массу</td>
+          <td>A<sub>r</sub></td>
+          <td>%</td>
+          <td><%= f.text_field :a_r %></td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>Зольность на сухую массу</td>
+          <td>A<sup>d</sup></td>
+          <td>%</td>
+          <td><%= f.text_field :a_d %></td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td>Теплота сгорания по бомбе</td>
+          <td>Q<sub>b</sub><sup>a</sup></td>
+          <td>ккал/кг</td>
+          <td><%= f.text_field :q_a_b %></td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td>Высшая теплота сгорания на сухую массу</td>
+          <td>Q<sub>d</sub><sup>s</sup></td>
+          <td>ккал/кг</td>
+          <td><%= f.text_field :q_d_s %></td>
+        </tr>
+        <tr>
+          <td>8</td>
+          <td>Высшая теплота сгорания на сухую беззольную массу</td>
+          <td>Q<sub>s</sub><sup>daf</sup></td>
+          <td>ккал/кг</td>
+          <td><%= f.text_field :q_daf_s %></td>
+        </tr>
+        <tr>
+          <td>9</td>
+          <td>Низшая теплота сгорания на рабочую массу</td>
+          <td>Q<sub>i</sub><sup>r</sup></td>
+          <td>ккал/кг</td>
+          <td><%= f.text_field :q_r_i %></td>
+        </tr>
+        <tr>
+          <td>10</td>
+          <td>Выход летучих веществ на сухую беззольную массу (горючую)</td>
+          <td>V<sup>daf</sup></td>
+          <td>%</td>
+          <td><%= f.text_field :v_daf %></td>
+        </tr>
+        <tr>
+          <td>11</td>
+          <td>Выход летучих веществ в аналитической пробе</td>
+          <td>V<sup>a</sup></td>
+          <td>%</td>
+          <td><%= f.text_field :v_a %></td>
+        </tr>
+        <tr>
+          <td>12</td>
+          <td>Общий водород в аналитической пробе</td>
+          <td>H<sup>a</sup></td>
+          <td>%</td>
+          <td><%= f.text_field :h_a %></td>
+        </tr>
+        <tr>
+          <td>13</td>
+          <td>Общая сера в аналитической пробе</td>
+          <td>S<sup>a</sup></td>
+          <td>%</td>
+          <td><%= f.text_field :s_a %></td>
+        </tr>
+      </table>
+
+    </div>
+
+
   <div class="actions">
     <%= f.submit 'Принять' %>
   </div>
