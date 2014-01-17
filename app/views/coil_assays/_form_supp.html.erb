@@ -1,0 +1,84 @@
+<%= form_for(@coil_assay) do |f| %>
+  <% if @coil_assay.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@coil_assay.errors.count, "error") %> prohibited this coil_assay from being saved:</h2>
+
+      <ul>
+      <% @coil_assay.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.hidden_field :is_suplier_assay %>
+
+    <div class="form_title">
+      <h2><%= f.label 'СЕРТИФИКАТ НА УГОЛЬ №' %>
+      <%= f.text_field :protocol_num, size: 4 %></h2>
+    </div>
+    <fieldset class="common_data">
+      <div class="field">
+        <%= f.label 'Структурное подразделение:' %>
+        <%= f.select :subdivision, ['ТЭЦ-2','ТЭЦ-4','ТЭЦ-5'], include_blank: :true %>
+      </div>
+
+      <div class="field">
+        <%= f.label 'Дата:' %>
+        <%= f.date_select :dttm, use_month_numbers: true, order: [:day, :month, :year] %>
+      </div>
+
+      <div class="field">
+        <%= f.label 'Марка, класс угля:' %>
+        <%= f.select :coil_class, ['КСН; класс рядовой'] %>
+      </div>
+
+      <div class="field">
+        <%= f.label 'Шахта (поставщик):' %>
+        <%= f.select :supplier, ['Экибазтуз-3; разрез Восточный'] %>
+      </div>
+
+      <div class="field">
+        <%= f.label 'Номер маршрута:' %>
+        <%= f.text_field :route %>
+      </div>
+    </fieldset>
+
+    <div class="asset_table">
+      <table>
+        <tr>
+          <th>№</th>
+          <th>Наименование показателя</th>
+          <th>Обознач.</th>
+          <th>Ед. изм.</th>
+          <th>Результат</th>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>Общая влага</td>
+          <td>W<sub>t</sub><sup>r</sup></td>
+          <td>%</td>
+          <td><%= f.text_field :w_r_t %></td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Зольность на сухую массу</td>
+          <td>A<sup>d</sup></td>
+          <td>%</td>
+          <td><%= f.text_field :a_d %></td>
+        </tr>
+          <td>3</td>
+          <td>Низшая теплота сгорания на рабочую массу</td>
+          <td>Q<sub>i</sub><sup>r</sup></td>
+          <td>ккал/кг</td>
+          <td><%= f.text_field :q_r_i %></td>
+        </tr>
+      </table>
+
+    </div>
+
+
+  <div class="actions">
+    <%= f.submit 'Принять' %>
+  </div>
+<% end %>

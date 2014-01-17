@@ -1,0 +1,76 @@
+<p>
+  <b>СП</b>
+  <%= @coil_assay.subdivision %>
+</p>
+<div class="form_title">
+  <h2>
+    <b>Сертификат № </b>
+    <%= @coil_assay.protocol_num %>
+  </h2>
+</div>
+
+
+<p>
+  <b>Дата: </b>
+  <%= @coil_assay.dttm.strftime("%d.%m.%Y") %>
+</p>
+
+<p>
+  <b>Марка, класс угля:  </b>
+  <%= @coil_assay.coil_class %>
+</p>
+
+<p>
+  <b>Шахта (поставщик): </b>
+  <%= @coil_assay.supplier %>
+</p>
+
+<p>
+  <b>Номер маршрута:</b>
+  <%= @coil_assay.route %>
+</p> </br>
+
+<table class="asset_table">
+  <tr>
+    <th>№</th>
+    <th>Наименование показателя</th>
+    <th>Обознач.</th>
+    <th>Ед. изм.</th>
+    <th>Результат</th>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td class="align_left">Общая влага</td>
+    <td>W<sub>t</sub><sup>r</sup></td>
+    <td>%</td>
+    <td><%= @coil_assay.w_r_t %></td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td class="align_left">Зольность на сухую массу</td>
+    <td>A<sup>d</sup></td>
+    <td>%</td>
+    <td><%= @coil_assay.a_d %></td>
+  </tr>
+  <tr>
+    <td>3</td>
+    <td class="align_left">Низшая теплота сгорания на рабочую массу</td>
+    <td>Q<sub>i</sub><sup>r</sup></td>
+    <td>ккал/кг</td>
+    <td><%= @coil_assay.q_r_i %></td>
+  </tr>
+</table></br>
+<div class="no_print">
+  <%= link_to 'К перечню проб', coil_assays_path %> |
+  <%= link_to 'Править', edit_coil_assay_path(@coil_assay) %> |
+  <%= link_to_function 'Печать', 'window.print();',class: 'nav_link' %>
+</div>
+<div class="no_view">
+  <table class="sign">
+    <tr><td colspan="2"></td> </tr>
+    <tr>
+      <td align="left">Отв. лицо</td>
+      <td>_______________________________________________________</td>
+    </tr>
+  </table>
+</div>

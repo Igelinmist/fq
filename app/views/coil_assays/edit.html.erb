@@ -1,3 +1,3 @@
-<%= render 'form' %>
+<%= @coil_assay.is_suplier_assay ? render('form_supp') : render('form') %>
 
 <%= link_to 'К перечню проб', coil_assays_path %>

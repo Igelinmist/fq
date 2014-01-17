@@ -1,8 +1,8 @@
 <table>
   <tr>
     <th>Структурное<br/>подразделение</th>
-    <th>Дата время</th>
-    <th>Номер<br/>протокола</th>
+    <th>Дата</th>
+    <th>Номер<br/>протокола /<br/>сертификата</th>
     <th>Номер<br/>маршрута</th>
     <th>Общая<br/>влага<br/>W<sub>t</sub><sup>r</sup><br/>(%)</th>
     <th>Зольность<br/>на сух. массу<br/>A<sup>d</sup><br/>(%)</th>
@@ -13,7 +13,7 @@
 <% @coil_assays.each do |coil_assay| %>
   <tr <%= 'id=suplier_data' if coil_assay.is_suplier_assay %>>
     <td><%= coil_assay.subdivision %></td>
-    <td><%= coil_assay.dttm.strftime("%d.%m.%Y %H:%M") %></td>
+    <td><%= coil_assay.dttm.strftime("%d.%m.%Y") %></td>
     <td><%= coil_assay.protocol_num %></td>
     <td><%= coil_assay.route %></td>
     <td><%= coil_assay.w_r_t %></td>

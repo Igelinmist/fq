@@ -89,7 +89,7 @@ class UsersController < ApplicationController
   end
 
   def home
-    @page_title = 'Управление топлива и транспорта'
+    @page_title = 'Стартовая страница авторизованного пользователя'
     @authorized_user = User.find(session[:user_id])
   end
 

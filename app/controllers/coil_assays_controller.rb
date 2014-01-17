@@ -8,9 +8,9 @@ class CoilAssaysController < ApplicationController
     @authorized_user = User.find(session[:user_id])
     case @authorized_user.subdivision
       when 'ТЭЦ-2','ТЭЦ-4','ТЭЦ-5'
-        @coil_assays = CoilAssay.order(:dttm).find_all_by_subdivision(@authorized_user.subdivision)
+        @coil_assays = CoilAssay.order('dttm desc, protocol_num').find_all_by_subdivision(@authorized_user.subdivision)
       else
-        @coil_assays = CoilAssay.order(:dttm).all
+        @coil_assays = CoilAssay.order('dttm desc, subdivision, protocol_num').all
     end
     respond_to do |format|
       format.html # index.html.erb
@@ -34,11 +34,11 @@ class CoilAssaysController < ApplicationController
   # GET /coil_assays/new
   # GET /coil_assays/new.json
   def new
-    @page_title = 'Ввод данных анализа новой пробы угля'
+    @page_title = 'Ввод данных качества угля'
     @coil_assay = CoilAssay.new
     @authorized_user = User.find(session[:user_id])
     @coil_assay.subdivision = @authorized_user.subdivision
-    @coil_assay.is_suplier_assay = true if (has_grant?(:edit_filial) || has_grant?(:correct_filial))
+    @coil_assay.is_suplier_assay = ((has_grant?(:edit_filial) || has_grant?(:correct_filial)))
 
     respond_to do |format|
       format.html # new.html.erb
@@ -48,9 +48,10 @@ class CoilAssaysController < ApplicationController
 
   # GET /coil_assays/1/edit
   def edit
-    @page_title = 'Редактирование данных анализа пробы угля'
+    @page_title = 'Редактирование данных качества угля'
     @coil_assay = CoilAssay.find(params[:id])
     @authorized_user = User.find(session[:user_id])
+
   end
 
   # POST /coil_assays
@@ -60,7 +61,7 @@ class CoilAssaysController < ApplicationController
     @authorized_user = User.find(session[:user_id])
     respond_to do |format|
       if @coil_assay.save
-        format.html { redirect_to coil_assays_url, notice: 'Данные нового анализа угля были успешно записаны.' }
+        format.html { redirect_to coil_assays_url, notice: 'Данные по качеству угля были успешно записаны.' }
         format.json { render json: @coil_assay, status: :created, location: @coil_assay }
       else
         format.html { render action: "new" }
@@ -76,7 +77,7 @@ class CoilAssaysController < ApplicationController
     @authorized_user = User.find(session[:user_id])
     respond_to do |format|
       if @coil_assay.update_attributes(params[:coil_assay])
-        format.html { redirect_to coil_assays_url, notice: 'Данные нового анализа угля были успешно скорректированы.' }
+        format.html { redirect_to coil_assays_url, notice: 'Данные по качеству угля были успешно скорректированы.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
