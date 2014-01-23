@@ -51,7 +51,9 @@ test:
 production:
   adapter: postgresql
   encoding: unicode
-  database: fq_production
+  database: fq
   pool: 5
-  username: fq
-  password:
+  username: puser
+  password: 1234
+  host: 192.168.20.104
+  port: 5432

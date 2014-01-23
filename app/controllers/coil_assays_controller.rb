@@ -4,7 +4,7 @@ class CoilAssaysController < ApplicationController
   # GET /coil_assays
   # GET /coil_assays.json
   def index
-    @page_title = 'Перечень анализов проб угля'
+    @page_title = 'Данные качества угля'
     @authorized_user = User.find(session[:user_id])
     case @authorized_user.subdivision
       when 'ТЭЦ-2','ТЭЦ-4','ТЭЦ-5'

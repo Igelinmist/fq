@@ -2,6 +2,7 @@
 class ReporterController < ApplicationController
   def view
     @authorized_user = User.find(session[:user_id])
+    @page_title = 'Отчет по качеству топлива'
     report_time = Time.now
     @coil_assays = @gaz_assays = @masut_assays = nil
     @report_dates =
@@ -13,15 +14,15 @@ class ReporterController < ApplicationController
         end
     case params[:fuel]
       when 'Уголь'
-        @coil_assays = CoilAssay.za_period(params[:period]).filter_sp(@user.subdivision)
+        @coil_assays = CoilAssay.za_period(params[:period]).filter_sp(@authorized_user.subdivision)
       when 'Газ'
-        @gaz_assays = GazAssay.za_period(params[:period]).filter_sp(@user.subdivision)
+        @gaz_assays = GazAssay.za_period(params[:period]).filter_sp(@authorized_user.subdivision)
       when 'Мазут'
-        @masut_assays = MasutAssay.za_period(params[:period]).filter_sp(@user.subdivision)
+        @masut_assays = MasutAssay.za_period(params[:period]).filter_sp(@authorized_user.subdivision)
       when 'Все'
-        @coil_assays = CoilAssay.za_period(params[:period]).filter_sp(@user.subdivision)
-        @gaz_assays = GazAssay.za_period(params[:period]).filter_sp(@user.subdivision)
-        @masut_assays = MasutAssay.za_period(params[:period]).filter_sp(@user.subdivision)
+        @coil_assays = CoilAssay.za_period(params[:period]).filter_sp(@authorized_user.subdivision)
+        @gaz_assays = GazAssay.za_period(params[:period]).filter_sp(@authorized_user.subdivision)
+        @masut_assays = MasutAssay.za_period(params[:period]).filter_sp(@authorized_user.subdivision)
     end
 
   end

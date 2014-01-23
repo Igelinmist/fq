@@ -6,7 +6,7 @@ module UsersHelper
   end
 
   def has_fuel?(fuel_type,user = User.find(session[:user_id]))
-    fuel_map = {coil: 512, gaz: 1048, masut: 2048}
+    fuel_map = {coil: 512, gaz: 1024, masut: 2048}
     (user.grants & fuel_map.fetch(fuel_type,0)) > 0
   end
 

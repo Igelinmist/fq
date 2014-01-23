@@ -9,15 +9,16 @@ class CoilAssay < ActiveRecord::Base
   def self.za_period(period_rus)
     case period_rus
       when 'Текущий месяц'
-        where(dttm: Date.today.at_beginning_of_month .. Date.tomorrow).order(:dttm)
+        where(dttm: Date.today.at_beginning_of_month .. Date.tomorrow).
+            order('subdivision','dttm', 'protocol_num')
       when 'Прошлый месяц'
-        where(dttm: Date.today.months_ago(1).at_beginning_of_month .. Date.today.at_beginning_of_month).order(:dttm)
+        where(dttm: Date.today.months_ago(1).at_beginning_of_month .. Date.today.at_beginning_of_month).order('dttm ASC', 'protocol_num ASC')
       when 'Текущий квартал'
-        where(dttm: Date.today.at_beginning_of_quarter .. Date.tomorrow).order(:dttm)
+        where(dttm: Date.today.at_beginning_of_quarter .. Date.tomorrow).order('is_suplier_assay DESC','dttm ASC', 'protocol_num ASC')
       when 'Текущий год'
-        where(dttm: Date.today.at_beginning_of_year .. Date.tomorrow).order(:dttm)
+        where(dttm: Date.today.at_beginning_of_year .. Date.tomorrow).order('is_suplier_assay DESC','dttm ASC', 'protocol_num ASC')
       else
-        where(dttm: Date.today .. Time.now).order(:dttm)
+        where(dttm: Date.today .. Time.now).order('is_suplier_assay DESC','dttm ASC', 'protocol_num ASC')
     end
   end
 

@@ -1,28 +1,33 @@
 <h3>Отчет по углю</h3>
+<% dc = get_docs_count_per_route @coil_assays -%>
+<% current_route = '' -%>
+<% ncv = 0 -%>
 <table>
   <tr>
     <th>Структурное<br/>подразделение</th>
-    <th>Дата время</th>
     <th>Номер<br/>маршрута</th>
-    <th>Влага<br/>рабочая<br/>(%)</th>
-    <th>Зольность<br/>рабочего<br/>топлива<br/>(%)</th>
-    <th>Зольность<br/>сухого<br/>топлива<br/>(%)</th>
-    <th>Выход<br/>летучих<br/>веществ<br/>(%)</th>
-    <th>Выход<br/>серы<br/>(%)</th>
-    <th>Низшая теплота<br/>сгорания<br/>(ккал/кг)</th>
+    <th>Документ</th>
+    <th>Номер<br/>документа</th>
+    <th>Дата</th>
+    <th>Общая<br/>влага<br/>W<sub>t</sub><sup>r</sup><br/>(%)</th>
+    <th>Зольность<br/>сухого<br/>топлива<br/>A<sup>d</sup><br/>(%)</th>
+    <th>Низшая теплота<br/>сгорания<br/>Q<sub>i</sub><sup>r</sup><br/>(ккал/кг)</th>
   </tr>
 
   <% @coil_assays.each do |coil_assay| %>
-      <tr <%= 'id=suplier_data' if coil_assay.is_suplier_assay %>>
-        <td><%= coil_assay.subdivision %></td>
-        <td><%= coil_assay.dttm.strftime("%d.%m.%Y %H:%M") %></td>
-        <td><%= coil_assay.route %></td>
-        <td><%= coil_assay.moisture %></td>
-        <td><%= coil_assay.wf_ash %></td>
-        <td><%= coil_assay.df_ash %></td>
-        <td><%= coil_assay.letuch %></td>
-        <td><%= coil_assay.sera %></td>
-        <td><%= coil_assay.ncv %></td>
+      <tr <%#= 'id=suplier_data' if coil_assay.is_suplier_assay %>>
+        <% if current_route != coil_assay.route -%>
+            <td <%= "rowspan=#{dc[coil_assay.route]}"%>><%= coil_assay.subdivision %></td>
+            <td <%= "rowspan=#{dc[coil_assay.route]}" %> ><%= coil_assay.route %></td>
+            <% current_route = coil_assay.route -%>
+            <% ncv = coil_assay.q_r_i -%>
+        <% end -%>
+        <td><%= coil_assay.is_suplier_assay ? 'удостоверение' : 'протокол' %></td>
+        <td><%= coil_assay.protocol_num %></td>
+        <td><%= coil_assay.dttm.strftime("%d.%m.%Y") %></td>
+        <td><%= coil_assay.w_r_t %></td>
+        <td><%= coil_assay.a_d %></td>
+        <td <%= 'class=warning' if coil_assay.q_r_i < ncv %>><%= coil_assay.q_r_i %></td>
       </tr>
   <% end %>
 </table>

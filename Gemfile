@@ -7,6 +7,8 @@ gem 'rails', '3.2.13'
 
 gem 'pg'
 
+gem 'capistrano'
+
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -37,4 +39,3 @@ gem 'bcrypt-ruby', '~> 3.0.0'
 # To use debugger
 # gem 'debugger'
 
-gem "formtastic"
