@@ -7,8 +7,8 @@ $:.unshift(File.expand_path('.lib', ENV['rvm_path']))
 
 require "rvm/capistrano"
 
-set :rvm_ruby_string, '1.9.3-p448'
-set :rvm_type, :user
+set :rvm_ruby_string, '1.9.3-p484'
+set :rvm_type, :system
 
 #file paths
 set :repository,  "#{user}@#{domain}:git/#{application}.git"
@@ -49,6 +49,7 @@ end
 
 after "deploy:update_code",:bundle_install
 desc "install the necessary prerequisites"
+#
 task :bundle_install, :roles => :app do
   run "cd #{release_path} && bundle install"
 end
