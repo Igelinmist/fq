@@ -1,50 +1,19 @@
-<p id="notice"><%= notice %></p>
+<html>
+<head>
+  <title>Качество топлива. Подробно.</title>
+  <%= stylesheet_link_tag "for_print", media: 'print' %>
+  <%= stylesheet_link_tag "for_print" %>
+  <style type="text/css" media="print">
+      div.no_print {display: none;}
+  </style>
+  <style type="text/css" media="screen">
+      div.no_view {display: none;}
+  </style>
 
-<p>
-  <b>Структурное подразделение:</b>
-  <%= @masut_assay.subdivision %>
-</p>
-
-<p>
-  <b>Дата время:</b>
-  <%= @masut_assay.dttm %>
-</p>
-
-<p>
-  <b>Плотность:</b>
-  <%= @masut_assay.density %>
-</p>
-
-<p>
-  <b>Влага:</b>
-  <%= @masut_assay.moisture %>
-</p>
-
-<p>
-  <b>Сера:</b>
-  <%= @masut_assay.sera %>
-</p>
-
-<p>
-  <b>Температура вспышки:</b>
-  <%= @masut_assay.flash_point %>
-</p>
-
-<p>
-  <b>Зола:</b>
-  <%= @masut_assay.ash %>
-</p>
-
-<p>
-  <b>Низшая рабочая теплота сгорания:</b>
-  <%= @masut_assay.ncv %>
-</p>
-
-<p>
-  <b>Признак данных поставщика:</b>
-  <%= @masut_assay.is_suplier_assay %>
-</p>
+</head>
+<body class="paper">
+<%= @masut_assay.is_suplier_assay ? render('ma_supp_data_table') : render('ma_data_table') %>
+</body>
 
 
-<%= link_to 'Edit', edit_masut_assay_path(@masut_assay) %> |
-<%= link_to 'Back', masut_assays_path %>
+</html>

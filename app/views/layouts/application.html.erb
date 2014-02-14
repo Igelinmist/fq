@@ -8,15 +8,16 @@
   <%= csrf_meta_tag %>
 </head>
 <body class="<%= controller.controller_name %>">
-    <%= render 'home/header' %>
+<%= render 'home/header' %>
+<% if controller.controller_name != 'home' %>
     <div id="columns">
       <div id="menu">
-        <% if @authorized_user  -%>
-            <%= 'Результаты качественного анализа:' if (has_grant?(:index,@authorized_user) || has_grant?(:edit,@authorized_user) || has_grant?(:correct,@authorized_user))%>
+        <% if @authorized_user -%>
+            <%= 'Результаты качественного анализа:' if (has_grant?(:index, @authorized_user) || has_grant?(:edit, @authorized_user) || has_grant?(:correct, @authorized_user)) %>
             <ul>
-              <li><%= link_to 'Уголь', coil_assays_path if has_fuel?(:coil,@authorized_user) %></li>
-              <li><%= link_to 'Газ', gaz_assays_path if has_fuel?(:gaz,@authorized_user) %></li>
-              <li><%= link_to 'Мазут', masut_assays_path if has_fuel?(:masut,@authorized_user) %></li>
+              <li><%= link_to 'Уголь', coil_assays_path if has_fuel?(:coil, @authorized_user) %></li>
+              <li><%= link_to 'Газ', gaz_assays_path if has_fuel?(:gaz, @authorized_user) %></li>
+              <li><%= link_to 'Мазут', masut_assays_path if has_fuel?(:masut, @authorized_user) %></li>
             </ul>
             <% if (@authorized_user.grants & 256) > 0 -%>
                 Администрирование
@@ -25,18 +26,21 @@
                   <li><%= link_to('Новости', news_index_path) %></li>
                 </ul>
             <% end -%>
-            <% if has_grant?(:report,@authorized_user) %>
+            <% if has_grant?(:report, @authorized_user) %>
                 <%= form_tag controller: 'reporter', action: 'view' do %>
                     <fieldset class="report_settings">
                       <legend>Отчет</legend>
-                      <%= select_tag :fuel, options_for_select(['Уголь','Газ','Мазут','Все']) %>
-                      <%= select_tag :period, options_for_select(['Текущий месяц','Прошлый месяц','Текущий квартал','Текущий год']) %>
+                      <%= select_tag :fuel, options_for_select(['Уголь', 'Газ', 'Мазут', 'Все']) %>
+                      <%= select_tag :period, options_for_select(['За последний месяц','Текущий месяц', 'Прошлый месяц', 'Текущий квартал', 'Текущий год']) %>
                       <%= submit_tag('Показать') %>
+
                     </fieldset>
                 <% end -%>
             <% end -%>
         <% end -%>
-
+        <br/>
+        <hr align="center" width=50%>
+        <%= yield :manual %>
       </div>
 
       <div id="main">
@@ -49,5 +53,8 @@
         <%= yield %>
       </div>
     </div>
+<% else %>
+    <%= yield %>
+<% end %>
 </body>
 </html>

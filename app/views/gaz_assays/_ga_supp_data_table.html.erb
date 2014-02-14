@@ -1,0 +1,38 @@
+<p>
+  <b>СП</b>
+  <%= @gaz_assay.subdivision %>
+</p>
+<div class="form_title">
+  <h2>
+    <b>Паспорт качества газа № </b>
+    <%= @gaz_assay.protocol_num %>
+  </h2>
+</div>
+
+
+<p>
+  <b>Месяц действия: </b>
+  <%= @gaz_assay.dttm.strftime("%m.%Y") %>
+</p>
+
+<table>
+  <tr>
+    <th>№</th>
+    <th>Наименование показателя</th>
+    <th>Обознач.</th>
+    <th>Ед. изм.</th>
+    <th>Результат</th>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td class="align_left">Низшая теплота сгорания</td>
+    <td>Q<sub>i</sub></td>
+    <td>ккал/кг</td>
+    <td><%= @gaz_assay.ncv %></td>
+  </tr>
+</table></br>
+<div class="no_print">
+  <%= link_to 'К данным по газу', gaz_assays_path %> |
+  <%= link_to 'Править', edit_gaz_assay_path(@gaz_assay) %> |
+  <%= link_to_function 'Печать', 'window.print();',class: 'nav_link' %>
+</div>

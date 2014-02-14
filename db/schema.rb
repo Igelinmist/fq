@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140109070502) do
+ActiveRecord::Schema.define(:version => 20140214034228) do
 
   create_table "coil_assays", :force => true do |t|
     t.string   "subdivision"
@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(:version => 20140109070502) do
     t.datetime "updated_at",                          :null => false
     t.boolean  "is_suplier_assay", :default => false
     t.boolean  "is_public_info",   :default => false
+    t.integer  "protocol_num"
   end
 
   create_table "masut_assays", :force => true do |t|
@@ -62,6 +63,7 @@ ActiveRecord::Schema.define(:version => 20140109070502) do
     t.datetime "updated_at",                          :null => false
     t.boolean  "is_suplier_assay", :default => false
     t.boolean  "is_public_info",   :default => false
+    t.integer  "protocol_num"
   end
 
   create_table "news", :force => true do |t|

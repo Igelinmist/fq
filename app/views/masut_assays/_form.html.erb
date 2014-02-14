@@ -10,40 +10,50 @@
       </ul>
     </div>
   <% end %>
+    <fieldset class="masut_assays_data">
+      <div class="field">
+        <%= f.label 'Структурное подразделение:' %>
+        <%= f.select :subdivision, ['ТЭЦ-2','ТЭЦ-3','ТЭЦ-4','ТЭЦ-5','КРК'], include_blank: :true %>
+      </div>
+      <div class="field">
+        <%= f.label 'Дата:' %>
+        <%= f.date_select :dttm,  use_month_numbers: true, order: [:day, :month, :year], default: Date.today %>
+      </div>
+      <div class="field">
+        <%= f.label 'Данные поставщика?:' %>
+        <%= f.check_box :is_suplier_assay %>
+      </div>
+      <div class="field">
+        <%= f.label 'Протокол/паспорт №:' %>
+        <%= f.text_field :protocol_num, size: 8 %>
+      </div>
+      <div class="field">
+        <%= f.label 'Плотность (кг/м3):' %>
+        <%= f.text_field :density, size: 8 %>
+      </div>
+      <div class="field">
+        <%= f.label 'Влажность (%):' %>
+        <%= f.text_field :moisture, size: 8 %>
+      </div>
+      <div class="field">
+        <%= f.label 'Сера (%):' %>
+        <%= f.text_field :sera, size: 8 %>
+      </div>
+      <div class="field">
+        <%= f.label 'Температура вспышки:' %>
+        <%= f.text_field :flash_point, size: 8 %>
+      </div>
+      <div class="field">
+        <%= f.label 'Зола (%):' %>
+        <%= f.text_field :ash, size: 8 %>
+      </div>
+      <div class="field">
+        <%= f.label 'Низшая рабочая теплота сгорания (ккал/кг):' %>
+        <%= f.text_field :ncv, size: 8 %>
+      </div>
+      <div class="actions">
+        <%= f.submit 'Принять' %>
+      </div>
+    </fieldset>
 
-  <div class="field">
-    <%= f.label 'Структурное подразделение:' %><br />
-    <%= f.select :subdivision, ['ТЭЦ-2','ТЭЦ-3','ТЭЦ-4','ТЭЦ-5','КРК'], include_blank: :true %>
-  </div>
-  <div class="field">
-    <%= f.label 'Дата время:' %><br />
-    <%= f.datetime_select :dttm,  use_month_numbers: true, order: [:day, :month, :year], include_seconds: false, default: start_of_hour %>
-  </div>
-  <div class="field">
-    <%= f.label 'Плотность (кг/м3):' %><br />
-    <%= f.text_field :density %>
-  </div>
-  <div class="field">
-    <%= f.label 'Влажность (%):' %><br />
-    <%= f.text_field :moisture %>
-  </div>
-  <div class="field">
-    <%= f.label 'Сера (%):' %><br />
-    <%= f.text_field :sera %>
-  </div>
-  <div class="field">
-    <%= f.label 'Температура вспышки:' %><br />
-    <%= f.text_field :flash_point %>
-  </div>
-  <div class="field">
-    <%= f.label 'Зола (%):' %><br />
-    <%= f.text_field :ash %>
-  </div>
-  <div class="field">
-    <%= f.label 'Низшая рабочая теплота сгорания (ккал/кг):' %><br />
-    <%= f.text_field :ncv %>
-  </div>
-  <div class="actions">
-    <%= f.submit 'Принять' %>
-  </div>
 <% end %>

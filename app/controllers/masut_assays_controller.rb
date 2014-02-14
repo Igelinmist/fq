@@ -23,7 +23,7 @@ class MasutAssaysController < ApplicationController
     @masut_assay = MasutAssay.find(params[:id])
     @authorized_user = User.find(session[:user_id])
     respond_to do |format|
-      format.html # show.html.erb
+      format.html {render layout: false}
       format.json { render json: @masut_assay }
     end
   end
@@ -31,6 +31,7 @@ class MasutAssaysController < ApplicationController
   # GET /masut_assays/new
   # GET /masut_assays/new.json
   def new
+    @page_title = 'Ввод данных качества мазута'
     @masut_assay = MasutAssay.new
     @authorized_user = User.find(session[:user_id])
     @masut_assay.subdivision = @authorized_user.subdivision
@@ -42,6 +43,7 @@ class MasutAssaysController < ApplicationController
 
   # GET /masut_assays/1/edit
   def edit
+    @page_title = 'Редактирование данных качества мазута'
     @masut_assay = MasutAssay.find(params[:id])
     @authorized_user = User.find(session[:user_id])
   end

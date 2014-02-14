@@ -40,7 +40,9 @@
 
       <div class="field">
         <%= f.label 'Номер маршрута:' %>
-        <%= f.text_field :route %>
+        <%#= f.text_field :route %>
+        <%#= f.select(:route,options_for_select(CoilAssay.select(:route).map{|ca| [ca.route]}), include_blank: :true) %>
+        <%= f.select(:route,options_for_select(CoilAssay.get_routes_set(@authorized_user.subdivision).map{|ca| [ca.route]}), include_blank: :true) %>
       </div>
     </fieldset>
 

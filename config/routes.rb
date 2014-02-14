@@ -1,23 +1,16 @@
 Fq::Application.routes.draw do
 
-  post "reporter/view"
+  post 'reporter/view', as: :reporter_view
 
   resources :news
 
-
   match 'home' => 'home#index'
-
 
   resources :masut_assays
 
-
   resources :coil_assays
 
-
   resources :gaz_assays
-
-
-
 
   controller :users do
     match 'users/home' => 'users#home'

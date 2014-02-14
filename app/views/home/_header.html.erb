@@ -2,7 +2,6 @@
   <div id="img_logo"><%= link_to image_tag("logo.png"),{controller: 'home', action: 'index'} %></div>
 
   <div id="authorize_block">
-    <%# if session[:user_id]  -%>
     <% if @authorized_user  -%>
         В системе:<br />
         <%= "#{@authorized_user.surname} #{@authorized_user.name}"  %><br />
@@ -11,5 +10,5 @@
         <%= render 'users/signin' %>
     <% end %>
   </div>
-  <div id="title"><%= @page_title || "Химический анализ топлива" %></div>
+  <div id="title"><%== @page_title || "Химический анализ топлива" %></div>
 </div>

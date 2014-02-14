@@ -11,19 +11,32 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label 'Структурное подразделение:' %><br />
-    <%= f.select :subdivision, ['ТЭЦ-2','ТЭЦ-3','ТЭЦ-4','КРК'] %>
-  </div>
-  <div class="field">
-    <%= f.label 'Дата время:' %><br />
-    <%= f.datetime_select :dttm, use_month_numbers: true, order: [:day, :month, :year], include_seconds: false, default: start_of_hour %>
-  </div>
-  <div class="field">
-    <%= f.label 'Низшая теплота сгорания (ккал/кг):' %><br />
-    <%= f.text_field :ncv %>
-  </div>
-  <div class="actions">
-    <%= f.submit 'Принять' %>
-  </div>
+    <fieldset class="gaz_assays_data">
+
+      <div class="field">
+        <%= f.label 'СП:' %>
+        <%= f.select :subdivision, ['ТЭЦ-2','ТЭЦ-3','ТЭЦ-4','КРК'] %>
+      </div>
+      <div class="field">
+        <%= f.label 'Данные поставщика?:' %>
+        <%= f.check_box :is_suplier_assay %>
+      </div>
+      <div class="field">
+        <%= f.label 'Протокол/паспорт №:' %>
+        <%= f.text_field :protocol_num, size: 8 %>
+      </div>
+      <div class="field">
+        <%= f.label 'Дата:' %>
+        <%= f.date_select :dttm, use_month_numbers: true, order: [:day, :month, :year], default: Date.today %>
+      </div>
+      <div class="field">
+        <%= f.label 'Низшая теплота сгорания (ккал/кг):' %>
+        <%= f.text_field :ncv, size: 8 %>
+      </div>
+      <div class="actions">
+        <%= f.submit 'Принять' %>
+      </div>
+    </fieldset>
+
+
 <% end %>

@@ -1,24 +1,19 @@
-<p id="notice"><%= notice %></p>
+<html>
+<head>
+  <title>Качество топлива. Подробно.</title>
+  <%= stylesheet_link_tag "for_print", media: 'print' %>
+  <%= stylesheet_link_tag "for_print" %>
+  <style type="text/css" media="print">
+      div.no_print {display: none;}
+  </style>
+  <style type="text/css" media="screen">
+      div.no_view {display: none;}
+  </style>
 
-<p>
-  <b>Структурное подразделение:</b>
-  <%= @gaz_assay.subdivision %>
-</p>
+</head>
+<body class="paper">
+<%= @gaz_assay.is_suplier_assay ? render('ga_supp_data_table') : render('ga_data_table') %>
+</body>
 
-<p>
-  <b>Дата время:</b>
-  <%= @gaz_assay.dttm %>
-</p>
 
-<p>
-  <b>Низшая теплота сгорания:</b>
-  <%= @gaz_assay.ncv %>
-</p>
-
-<p>
-  <b>Признак данных поставщика:</b>
-  <%= @gaz_assay.is_suplier_assay %>
-</p>
-
-<%= link_to 'Edit', edit_gaz_assay_path(@gaz_assay) %> |
-<%= link_to 'Back', gaz_assays_path %>
+</html>

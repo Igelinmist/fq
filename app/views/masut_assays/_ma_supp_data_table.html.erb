@@ -1,0 +1,75 @@
+<p>
+  <b>СП</b>
+  <%= @masut_assay.subdivision %>
+</p>
+<div class="form_title">
+  <h2>
+    <b>Паспорт № </b>
+    <%= @masut_assay.protocol_num %>
+  </h2>
+</div>
+
+
+<p>
+  <b>Дата отбора пробы: </b>
+  <%= @masut_assay.dttm.strftime("%d.%m.%Y") %>
+</p>
+
+<table>
+  <tr>
+    <th>№</th>
+    <th>Наименование показателя</th>
+    <th>Ед. изм.</th>
+    <th>Результат</th>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td class="align_left">Плотность</td>
+    <td>кг/м3</td>
+    <td><%= @masut_assay.density %></td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td class="align_left">Влажность</td>
+    <td>%</td>
+    <td><%= @masut_assay.moisture %></td>
+  </tr>
+  <tr>
+    <td>3</td>
+    <td class="align_left">Сера</td>
+    <td>%</td>
+    <td><%= @masut_assay.sera %></td>
+  </tr>
+  <tr>
+    <td>4</td>
+    <td class="align_left">Температура вспышки</td>
+    <td>гр.С</td>
+    <td><%= @masut_assay.flash_point %></td>
+  </tr>
+  <tr>
+    <td>5</td>
+    <td class="align_left">Зола</td>
+    <td>%</td>
+    <td><%= @masut_assay.ash %></td>
+  </tr>
+  <tr>
+    <td>6</td>
+    <td class="align_left">Низшая рабочая теплота сгорания</td>
+    <td>ккал/кг</td>
+    <td><%= @masut_assay.ncv %></td>
+  </tr>
+</table></br>
+<div class="no_print">
+  <%= link_to 'К данным по мазуту', masut_assays_path %> |
+  <%= link_to 'Править', edit_masut_assay_path(@masut_assay) %> |
+  <%= link_to_function 'Печать', 'window.print();',class: 'nav_link' %>
+</div>
+<div class="no_view">
+  <table class="sign">
+    <tr><td colspan="2"></td> </tr>
+    <tr>
+      <td align="left">Ответственное лицо</td>
+      <td>_______________________________________________________</td>
+    </tr>
+  </table>
+</div>

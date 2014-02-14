@@ -1,7 +1,8 @@
 <table>
   <tr>
     <th>Структурное<br/>подразделение</th>
-    <th>Дата время</th>
+    <th>Дата</th>
+    <th>Номер<br/>протокола/паспорта</th>
     <th>Плотность</th>
     <th>Влага</th>
     <th>Сера</th>
@@ -14,7 +15,8 @@
 <% @masut_assays.each do |masut_assay| %>
   <tr <%= 'id=suplier_data' if masut_assay.is_suplier_assay %>>
     <td><%= masut_assay.subdivision %></td>
-    <td><%= masut_assay.dttm.strftime("%d.%m.%Y %H:%M") %></td>
+    <td><%= masut_assay.dttm.strftime("%d.%m.%Y") %></td>
+    <td><%= masut_assay.protocol_num %></td>
     <td><%= masut_assay.density %></td>
     <td><%= masut_assay.moisture %></td>
     <td><%= masut_assay.sera %></td>
@@ -22,8 +24,9 @@
     <td><%= masut_assay.ash %></td>
     <td><%= masut_assay.ncv %></td>
     <td>
-      <%= link_to image_tag("edit_wb.png",:size => "16x16", :alt => "Править", :title => "Править"), edit_masut_assay_path(masut_assay) if grant_for_action(masut_assay.is_suplier_assay)[:can_edit]%>
-      <%= link_to image_tag("delete_wb.png",:size => "16x16", :alt => "Удалить", :title =>"Удалить"), masut_assay, method: :delete, data: { confirm: 'Are you sure?' } if grant_for_action(masut_assay.is_suplier_assay)[:can_delete]%>
+      <%= link_to image_tag("show_wb.png",:size => "16x16", :alt => "Подробно", :title => "Подробно"), masut_assay if grant_for_action(false,@authorized_user)[:can_edit]%>
+      <%= link_to image_tag("edit_wb.png",:size => "16x16", :alt => "Править", :title => "Править"), edit_masut_assay_path(masut_assay) if grant_for_action(false)[:can_edit]%>
+      <%= link_to image_tag("delete_wb.png",:size => "16x16", :alt => "Удалить", :title =>"Удалить"), masut_assay, method: :delete, data: { confirm: 'Are you sure?' } if grant_for_action(false)[:can_delete]%>
     </td>
   </tr>
 <% end %>
@@ -32,3 +35,16 @@
 <br />
 
 <%= link_to 'Ввести данные новой пробы', new_masut_assay_path  if grant_for_new_assay? %>
+
+<% content_for :manual do %>
+    <p id="manual">
+      <i>Краткая справка:</i><br/>
+      На этой странице Вы получаете возможность просматривать данные о качестве газа. Строки выделенные цветом соответствуют данным сертификатов.
+      Здесь доступны следующие действия:<br />
+      <%= image_tag("show_wb.png") %> - посмотреть данные подробнее и получить возможность вывести форму на печать;<br />
+      <%= image_tag("edit_wb.png") %> - редактировать данные анализов качества;<br />
+      <%= image_tag("delete_wb.png") %> - удалить данные анализов качества.<br />
+      <br />
+      Для завершения работы в приложении всегда можно нажать кнопку 'Выход' в верхнем правом углу.
+    </p>
+<% end %>
